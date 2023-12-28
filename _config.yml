@@ -3,12 +3,14 @@
 # -----------------------------------------------------------------------------
 
 title: blank # the website title (if blank, full name will be used instead)
-first_name: You
+first_name: Maciej
 middle_name: R.
-last_name: Name
-email: you@example.com
+last_name: Wozniak
+email: maciejw@kth.se
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
-  A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
+  Robot perception fails and it is our task to develop the tools that account for that!
+I am working on developing deep learning models and AR/VR applications for robotics, that account for real-world imperfections, such as missing data, sensor failure, novel
+domains, and challenging environments.
 footer_text: >
   Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
   Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
