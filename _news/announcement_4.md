@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Check our project on Unsupervised Adversarial Domain Adaptaion for 3D Object Detection [(UADA3D)](../_includes/uda/index.html)
+Check our project on Unsupervised Adversarial Domain Adaptaion for 3D Object Detection [(UADA3D)](../uda/index.html)
