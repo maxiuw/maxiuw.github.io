@@ -112,7 +112,7 @@ body {
 
 .results-carousel {
   overflow: hidden;
-  margin: auto;
+  margin: 0px;
 }
 
 .results-carousel .item {
@@ -120,15 +120,19 @@ body {
   overflow: hidden;
   border: 1px solid #bbb;
   border-radius: 10px;
-  padding: 0;
+  padding: 20;
   font-size: 0;
-/*  display: flex;
+  width: 600px;
+display: flex;  
   background-color: rgba(0, 0, 0, 1);
   flex-basis: fit-content;
-  height: 583px;*/
+  height: 300px; 
 }
 
 .results-carousel video {
+  margin: 0 auto;
+}
+.results-carousel image {
   margin: 0 auto;
 }
 
@@ -192,3 +196,23 @@ body {
     height: 335px;
     object-fit: cover;
 }
+
+.container_subfig {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.figure {
+    text-align: center;
+    margin: 10px;
+}
+.figure img {
+    width: 100%;
+    height: auto;
+    max-width: 300px;
+}
+.figure figcaption {
+    margin-top: 5px;
+    font-size: 14px;
+}
+    
