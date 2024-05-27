@@ -21,6 +21,7 @@
 
     gtag('config', 'G-PYVRSFMDRL');
   </script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
@@ -265,15 +266,15 @@
               symbolize the features extracted by the detection backbone from the two distinct domains. This approach ensures the extraction of domain invariant features. 
               The loss function of UADA3D<sub>Lm</sub> marginal alignment module is defined through Binary Cross Entropy.
 
-              The output of the point-based detection backbone in <a href="https://github.com/yifanzhang713/IA-SSD">IA-SSD</a> is given by $N$ point features with feature dimension $C$ and corresponding encodings.
-               Point-wise discriminators can be utilized to identify the distribution these points are drawn from. The input to the proposed marginal discriminator $g_{\theta_D}$ is 
-               given by point-wise center features obtained through set abstraction and downsampling layers. The discriminator is made up of $5$ fully connected layers 
-               ($512,256,128,64,32,1$) that reduce the feature dimension from $C$ to $1$. LeakyReLU is used in the activation layers and a final sigmoid layer is used for domain prediction. 
+              The output of the point-based detection backbone in <a href="https://github.com/yifanzhang713/IA-SSD">IA-SSD</a> is given by N  point features with feature dimension  C   and corresponding encodings.
+               Point-wise discriminators can be utilized to identify the distribution these points are drawn from. The input to the proposed marginal discriminator \( g_{\theta_D} \)  is 
+               given by point-wise center features obtained through set abstraction and downsampling layers. The discriminator is made up of 5  fully connected layers 
+                (512,256,128,64,32,1 ) that reduce the feature dimension from C to 1  . LeakyReLU is used in the activation layers and a final sigmoid layer is used for domain prediction. 
 
-              The backbone in Centerpoint~\cite{yin2021center} uses sparse convolutions to extract voxel-based features that are flattened into 2D BEV-features. 
-              Therefore, the input to the view-based marginal discriminator is given by a pseudo image of feature dimension $C$ with spatial dimensions $w$ and $h$ that define 
+              The backbone in Centerpoint uses sparse convolutions to extract voxel-based features that are flattened into 2D BEV-features. 
+              Therefore, the input to the view-based marginal discriminator is given by a pseudo image of feature dimension C with spatial dimensions \(w\) and \(h\) that define 
               the 2D BEV-grid. Since 2D convolutions are more computationally demanding over the MLP on the heavily downsampled point cloud in <a href="https://github.com/yifanzhang713/<a href="https://github.com/yifanzhang713/IA-SSD">IA-SSD</a>"><a href="https://github.com/yifanzhang713/IA-SSD">IA-SSD</a></a>D<sub>Lm</sub>, the 2D marginal discriminator 
-              uses a $3$-layered CNN that reduces the feature dimension from $C$ to $1$ (256,256,128,1), using a kernel size of $3$ and a stride of $1$. Same as in the point-wise case, 
+              uses a \(3\)-layered CNN that reduces the feature dimension from C to 1 (256,256,128,1), using a kernel size of 3 and a stride of 1. Same as in the point-wise case, 
               the loss function of UADA3D<sub>Lm</sub> is defined through  Cross Entropy.        </p>
         </div>
       </div>
@@ -295,17 +296,17 @@
         <div class="content">
           <p>
             
-In ablation studies we tested two different strategies for \textit{GRL}-coefficient $\lambda$ on UADA3D and UADA3D\textsubscript{$\mathcal{L}m$}. 
-Firstly, a stationary $\lambda=0.1$ was tested following the setting used for most adversarial UDA strategies in 2D object detection~\cite{chen2018domain, saito2019strong}.
- Secondly, we follow other approaches~\cite{ganin2015unsupervised,li2023domain} where $\lambda$ was increased over the training according to:
+In ablation studies we tested two different strategies for GRL-coefficient  \( \lambda \) on UADA3D and UADA3DLm. 
+Firstly, a stationary \(  \lambda=0.1 \) was tested following the setting used for most adversarial UDA strategies in 2D object detection.
+ Secondly, we follow other approaches where \( \lambda \) was increased over the training according to:
 
 \begin{equation} \label{eq:params-grl}
     \lambda = \alpha (\frac{2}{1 + exp(-\gamma p)} - 1)
 \end{equation}
 
-where $\alpha \in [0,1]$ is a scaling factor that determines the final $\lambda$, $\gamma=10$ and $p$ is the training progress from start $0$ to finish $1$. 
-$\alpha$-values of $1, 0.5, 0.2, 0.1$ were tested. The $\lambda$ parameter for different values of $\alpha$ throughout training process is illustrated in \cref{fig:grl-curves}. 
-Numerical results regarding the influence of $\lambda$ on the model performance are available in Section 5.1 Ablation Studies. 
+where \( \alpha \in [0,1] \) is a scaling factor that determines the final \( \lambda \), \( \gamma \) =10 and p is the training progress from start \(0\) to finish \(1\). 
+\( \alpha \)values of 1, 0.5, 0.2, 0.1 were tested. The \( \lambda \) parameter for different values of \( \alpha \) throughout training process is illustrated in graph below. 
+Numerical results regarding the influence of \( \lambda \) on the model performance are available in Section 5.1 Ablation Studies. 
           </p>
           <div class="item item-fullbody">
             <img src="figures/GRL-1.png" alt="overview_image" width="100%">
@@ -316,6 +317,75 @@ Numerical results regarding the influence of $\lambda$ on the model performance 
     </div>
   </div>
 </section>
+
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <h2 class="title is-3">Random Object Scaling</h2>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <div class="content">
+          <p>
+            
+            Random Object Scaling (ROS) applies random scaling factors to ground truth bounding boxes and their corresponding points. 
+            Each object point in ego-vehicle frame \( (p_i^x,p_i^y,p_i^z)_{\mathrm{ego}} \) is transformed to local object coordinates
+
+            \begin{equation}
+                \begin{array}{cc}
+                     (p_i^l,p_i^w,p_i^h)_{\mathrm{object}} = ((p_i^x,p_i^y,p_i^z)_{\mathrm{ego}} -  \\
+                     ~~~~~~~~~~~~~~(c_x,c_y,c_z)_{\mathrm{object}}) \times R_{\mathrm{object}}
+                \end{array}
+            \end{equation}
+            
+            
+            \noindent
+            where \( (c_x,c_y,c_z)_{\mathrm{object}} \) is object center coordinates and \(R_{\mathrm{object}}\) 
+            is the rotation matrix between the ego-coordinates and object-coordinates. Each object point is then scaled by
+            a random scaling factor \(r\) drawn from a uniform random distribution:
+            The length \(l\), width \(w\), and height \(h\) of each bounding box are also scaled accordingly with \(r\).
+            
+            \begin{equation}
+                \begin{array}{cc}
+                     (p_i^l,p_i^w,p_i^h)_{\mathrm{object},\mathrm{scaled}} = r \cdot (p_i^l,p_i^w,p_i^h)_{\mathrm{object}} \;  \\
+                     r \in U(r_{\mathrm{min}},r_{\mathrm{max}}).
+                \end{array}
+            \end{equation}
+            <div class="item item-fullbody">
+              <img src="figures/ros_scale.png" alt="overview_image" width="50%" class="center">
+              <!-- add image --> 
+              <!-- <h3 class="title is-3"> MS3D++</h3> -->
+            </div>  
+            Afterwards, each object is transformed back into the ego-vehicle frame. The length \(l\), width \(w\), 
+            and height \(h\) of each bounding box are also scaled accordingly with \(r\).
+            
+            Following previous works experiments are performed by including object scaling in the source-data to account for different vehicle sizes. 
+            As examined in Section 4.1 there is a large difference between the vehicle sizes in LiDAR-CS, corresponding to large vehicle sizes typically 
+            found in the USA, and the smaller vehicles in Europe encountered by the robot, which encounters the smaller vehicles in Europe. 
+            Specifically, ROS from ST3D~\cite{yang2021st3d} is utilized where the objects and corresponding bounding boxes are scaled according to uniform 
+            noise in a chosen scaling interval. While previous UDA methods on LiDAR-based 3D object detection often apply domain adaptation only to a single 
+            object category, we consider it a multiclass problem. Therefore, ROS is used for all three classes (Vehicle, Pedestrian, and Cyclist)
+             with different scaling intervals, shown in~\cref{tab:ros_scale}. The results of different scaling intervals are shown in table below.
+              We can see that the best setting is \(\Delta_{x,y,z} \in \{0.80,1.20\}\) for vehicles and \(\Delta_{x,y,z} \in \{0.9,1.1\}\) 
+              for pedestrians and cyclists, thus, we chose this for all of our experiments.  
+            
+          <div class="item item-fullbody">
+            <img src="figures/ros_results.png" alt="overview_image" width="40%" class="center">
+            <!-- add image --> 
+            <!-- <h3 class="title is-3"> MS3D++</h3> -->
+          </div>
+        </p>
+    </div>
+  </div>
+</section>
+
+
+
+
 
 
 <section class="section">
@@ -384,8 +454,8 @@ achieved these results using only 20 labeled target examples for this few-shot a
             Since the data was collected in scenarios similar to the intended use cases for such robots
             it can be seen as an accurate representation of the data that would be encountered in
             real-world operation. The data was labeled using the open-source annotation software
-            SUSTechPoints [21]. In our train/test split, we used a similar number of scans as on
-            the KITTI [9] data. We used 7000 scans for training and 3500 for testing.
+            SUSTechPoints. In our train/test split, we used a similar number of scans as on
+            the KITTI data. We used 7000 scans for training and 3500 for testing.
             Together with this paper, we are planning to release the robot data we used in
             our scenarios. The complete dataset is a part of another project and will be published
             soon. In addition to the LiDAR data and class labels (used in this project), the full
@@ -413,9 +483,9 @@ achieved these results using only 20 labeled target examples for this few-shot a
             <p>
               The loss of our network consists of 2 components: detection loss and discriminator loss. While we optimize 
               the discriminators with L_C, we backpropagate this loss through the gradient reversal layer to the rest of the network.
-               Thus, while the discriminator's objective is to minimize $\mathcal{L}_C$, the feature extractor and detection head benefit from 
-               maximizing $\mathcal{L}_C$. In other words, the network aims to create features that are domain-invariant and useful for the object
-                detection task. We can observe these losses in \cref{fig:losses_all}. Initially, we can see that the discriminator is capable of 
+               Thus, while the discriminator's objective is to minimize \(\mathcal{L}_C\), the feature extractor and detection head benefit from 
+               maximizing \(\mathcal{L}_C\). In other words, the network aims to create features that are domain-invariant and useful for the object
+                detection task. We can observe these losses in figure below. Initially, we can see that the discriminator is capable of 
                 distinguishing between the domains as the loss decreases and approaches 0. However, after approximately 30\% of the training, 
                 the network begins to produce more invariant features. By about 40\% of the training, the network has learned to generate invariant 
                 features, leading to a rapid increase in conditional discriminator loss. These features are still beneficial for detection, 
@@ -476,12 +546,12 @@ achieved these results using only 20 labeled target examples for this few-shot a
              improves the model's ability to identify distant, close-by as well as heavily occluded objects. In the next figures,
               red bounding boxes indicate predictions, while green bounding boxes represent ground truth. We added blue squares to highlight 
               zoomed-in regions, and yellow dotted squares to highlight hard-to-detect far-away objects. As illustrated in 
-              \cref{fig:zoomed_in1,fig:zoomed_in2,fig:zoomed_in3}, most of the models in comparison tend to miss far-away or 
+              figures below, most of the models in comparison tend to miss far-away or 
               partially occluded objects, without producing many false positives. Additionally, they also tend to miss smaller non-vehicle objects.
                UADA3D on the other hand substantially enhances the model's robustness in these challenging scenarios, ensuring that such objects are
-                not overlooked. Our method detects not only close and far away vehicles (\cref{fig:zoomed_in1,fig:zoomed_in2,fig:zoomed_in3}) 
-                but also hard-to-see cyclists and pedestrians (zoomed-in regions in \cref{fig:zoomed_in1} and \cref{fig:zoomed_in2}, as well as 
-                highlighted with the yellow box containing one instance in \cref{fig:zoomed_in1}).  Moreover, in \cref{fig:zoomed_in4}, 
+                not overlooked. Our method detects not only close and far away vehicles (see figures) 
+                but also hard-to-see cyclists and pedestrians (zoomed-in regions in figures below, as well as 
+                highlighted with the yellow box containing one instance).  Moreover, in the figures with results on robot data, 
                 which presents results on robot data, we show UADA3D's comprehensive adaptation capabilities, where we successfully identify every 
                 object in the scene, even though the domain gap is substantially large (self-driving car domain to mobile robot). This highlights 
                 the effectiveness of our approach in diverse and demanding real-world applications.
@@ -534,7 +604,7 @@ achieved these results using only 20 labeled target examples for this few-shot a
     <div class="item item-fullbody">
       <img src="figures/detections_png/UADA1-1.png" alt="overview_image" width="95%">
       <!-- add image --> 
-      <h3 class="title is-3"> UADA3D</h3>
+      <h3 class="title is-3"> UADA3D (ours)</h3>
       
     </div>
   </div>
@@ -597,7 +667,7 @@ Tracking camera motion (horizontal)  -->
   <div class="item item-fullbody">
     <img src="figures/detections_png/UADA2-1.png" alt="overview_image" width="95%">
     <!-- add image --> 
-    <h3 class="title is-3"> UADA3D</h3>
+    <h3 class="title is-3"> UADA3D (ours)</h3>
     
   </div>
 
@@ -624,38 +694,85 @@ Tracking camera motion (horizontal)  -->
         <source type="video/mp4" src="static/videos/2558_side-0-1.mp4" /> 
     </video> -->
     <div class="item item-fullbody">
-      <img src="figures/detections_png/DTS3-1.png" alt="overview_image" width="55%">
+      <img src="figures/detections_png/DTS3-1.png" alt="overview_image" width="70%">
       <!-- add image --> 
       <h3 class="title is-3"> DTS</h3>
       
     </div>
     <div class="item item-fullbody">
-      <img src="figures/detections_png/LD3-1.png" alt="overview_image" width="55%">
+      <img src="figures/detections_png/LD3-1.png" alt="overview_image" width="70%">
       <!-- add image --> 
       <h3 class="title is-3"> L.D.</h3>
       
     </div>
     <div class="item item-fullbody">
-      <img src="figures/detections_png/ST3D3-1.png" alt="overview_image" width="55%">
+      <img src="figures/detections_png/ST3D3-1.png" alt="overview_image" width="70%">
       <!-- add image --> 
       <h3 class="title is-3"> ST3D</h3>
       
     </div>
     <div class="item item-fullbody">
-      <img src="figures/detections_png/MS3D3-1.png" alt="overview_image" width="55%">
+      <img src="figures/detections_png/MS3D3-1.png" alt="overview_image" width="70%">
       <!-- add image --> 
       <h3 class="title is-3"> MS3D++</h3>
       
     </div>
     <div class="item item-fullbody">
-      <img src="figures/detections_png/UADA3-1.png" alt="overview_image" width="55%">
+      <img src="figures/detections_png/UADA3-1.png" alt="overview_image" width="70%">
       <!-- add image --> 
-      <h3 class="title is-3"> UADA3D</h3>
+      <h3 class="title is-3"> UADA3D (ours)</h3>
     </div>
   </div>
 </section>
 
 
+<section class="section">
+  <div class="container is-max-desktop">
+
+  <div class="columns is-centered has-text-centered">
+    <h1 class="title is-3"> Robot results</h1>
+  </div>
+
+</div>
+
+<br>
+
+<div id="wrapper" style="text-align:center;"> 
+    
+    <!-- <video autoplay controls muted loop playsinline id="result_video_side" height="400px" width="auto" > 
+        <source type="video/mp4" src="static/videos/2558_side-0-1.mp4" /> 
+    </video> -->
+    <div class="item item-fullbody">
+      <img src="figures/DetectionsLaura/dts1.png" alt="overview_image" width="70%">
+      <!-- add image --> 
+      <h3 class="title is-3"> DTS</h3>
+      
+    </div>
+    <div class="item item-fullbody">
+      <img src="figures/DetectionsLaura/LD1.png" alt="overview_image" width="70%">
+      <!-- add image --> 
+      <h3 class="title is-3"> L.D.</h3>
+      
+    </div>
+    <div class="item item-fullbody">
+      <img src="figures/DetectionsLaura/st3d1.png" alt="overview_image" width="70%">
+      <!-- add image --> 
+      <h3 class="title is-3"> ST3D</h3>
+      
+    </div>
+    <div class="item item-fullbody">
+      <img src="figures/DetectionsLaura/ms3d.png" alt="overview_image" width="70%">
+      <!-- add image --> 
+      <h3 class="title is-3"> MS3D++</h3>
+      
+    </div>
+    <div class="item item-fullbody">
+      <img src="figures/DetectionsLaura/uada1.png" alt="overview_image" width="70%">
+      <!-- add image --> 
+      <h3 class="title is-3"> UADA3D (ours)</h3>
+    </div>
+  </div>
+</section>
 
 
 
