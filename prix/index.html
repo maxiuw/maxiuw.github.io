@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRIX: Learning to Plan from Raw Pixels for End-to-End Autonomous Driving</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .section-title {
+            @apply text-3xl font-bold text-gray-800 mb-6 text-center;
+        }
+        .card {
+            @apply bg-white rounded-2xl shadow-lg overflow-hidden p-6 md:p-8;
+        }
+        .citation-box {
+            @apply bg-gray-100 p-4 rounded-lg text-left text-sm font-mono whitespace-pre-wrap;
+        }
+        .indented-paragraph {
+            text-indent: 1.5em;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-700">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-gray-900">PRIX Project</h1>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#abstract" class="text-gray-600 hover:text-blue-600">Abstract</a>
+                <a href="#contributions" class="text-gray-600 hover:text-blue-600">Contributions</a>
+                <a href="#architecture" class="text-gray-600 hover:text-blue-600">Architecture</a>
+                <a href="#results" class="text-gray-600 hover:text-blue-600">Results</a>
+                <a href="#citation" class="text-gray-600 hover:text-blue-600">Citation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <!-- Main Title Section -->
+        <section class="text-center mb-16">
+            <div class="flex items-center justify-center mb-4">
+                 <!-- <div class="w-20 flex-shrink-0 flex justify-end pr-4">
+                    <a href="https://www.flaticon.com/free-icons/formula-1" title="Formula 1 icons created by Darius Dan - Flaticon" target="_blank" rel="noopener noreferrer">
+
+                    <img src="figures/f1.png" alt="Formula 1 Icon" class="w-25 h-25"/>
+                 </div> -->
+                 <div class="flex-grow">
+                    <h1 class="text-4xl font-extrabold text-gray-900">PRIX: Learning to Plan from Raw Pixels for End-to-End Autonomous Driving</h1>
+                 </div>
+                 <!-- <div class="w-20 flex-shrink-0"></div> Spacer to balance the icon -->
+            </div>
+            <!-- Authors -->
+            <div class="mt-4 text-lg text-gray-600">
+                <span class="font-medium">Maciej K. Wozniak¹</span>,
+                <span class="font-medium">Lianhang Liu²</span>,
+                <span class="font-medium">Yixi Cai¹</span>,
+                <span class="font-medium">Patric Jensfelt¹</span>
+            </div>
+            <div class="mt-2 text-md text-gray-500">
+                <span>¹KTH Royal Institute of Technology, Sweden</span> &nbsp;&nbsp;
+                <span>²Scania CV AB</span>
+            </div>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto mt-6">An efficient, camera-only, end-to-end autonomous driving model that achieves state-of-the-art performance without LiDAR or explicit BEV representations.</p>
+            <div class="mt-8 flex justify-center space-x-4">
+                <a href="https://github.com/maxiuw/prix" target="_blank" class="bg-blue-600 text-white font-semibold px-8 py-3 rounded-lg hover:bg-blue-700 transition duration-300">
+                    Code
+                </a>
+                <a href="diffusion_wacv.pdf" target="_blank" class="bg-gray-700 text-white font-semibold px-8 py-3 rounded-lg hover:bg-gray-800 transition duration-300">
+                    Read The Paper (PDF)
+                </a>
+            </div>
+        </section>
+
+        <!-- Abstract Section -->
+        <section id="abstract" class="mb-16 scroll-mt-24">
+            <div class="card">
+                <h2 class="section-title">Abstract</h2>
+                <p class="text-lg leading-relaxed indented-paragraph">
+                    While end-to-end autonomous driving models show promising results, their practical deployment is often hindered by large model sizes, a reliance on expensive LiDAR sensors, and computationally intensive BEV feature representations. This limits their scalability, especially for mass-market vehicles equipped only with cameras. To address these challenges, we propose PRIX (Plan from Raw Pixels). Our novel and efficient end-to-end driving architecture operates using only camera data, without explicit BEV representation and forgoing the need for LiDAR. PRIX leverages a visual feature extractor coupled with a generative planning head to predict safe trajectories from raw pixel inputs directly. A core component of our architecture is the Context-aware Recalibration Transformer (CaRT), a novel module designed to effectively enhance multi-level visual features for more robust planning. We demonstrate through comprehensive experiments that PRIX achieves state-of-the-art performance on the NavSim and nuScenes benchmarks, matching the capabilities of larger, multimodal diffusion planners while being significantly more efficient in terms of inference speed and model size, making it a practical solution for real-world deployment.
+                </p>
+            </div>
+        </section>
+
+        <!-- Contributions Section -->
+        <section id="contributions" class="mb-16 scroll-mt-24">
+            <h2 class="section-title">Key Contributions</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3 text-blue-600">High Efficiency</h3>
+                    <p>Introduced PRIX, a novel camera-only, end-to-end planner that is significantly more efficient than multimodal and previous camera-only approaches in terms of inference speed and model size.</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3 text-blue-600">CaRT Module</h3>
+                    <p>Proposed the Context-aware Recalibration Transformer (CaRT), a new module designed to effectively enhance multi-level visual features for more robust planning.</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3 text-blue-600">Comprehensive Validation</h3>
+                    <p>Provided a comprehensive ablation study that validates our architectural choices and offers insights into optimizing the trade-off between performance, speed, and model size.</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-3 text-blue-600">State-of-the-Art Performance</h3>
+                    <p>Achieved SOTA performance on NavSim and nuScenes datasets, outperforming larger, multimodal planners while being much smaller and faster.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Architecture Section -->
+        <section id="architecture" class="mb-16 scroll-mt-24">
+             <div class="card">
+                <h2 class="section-title">Architecture Overview</h2>
+                <p class="text-lg leading-relaxed mb-8 max-w-3xl mx-auto text-center indented-paragraph">
+                    PRIX's architecture processes multi-camera images through a visual backbone featuring our novel CaRT module. These enhanced visual features, combined with the vehicle's state and noisy anchors, are fed into a conditional diffusion planner to generate the final, safe trajectory.
+                </p>
+                <img src="figures/main.png" 
+                     alt="PRIX Architecture Diagram" 
+                     class="rounded-lg shadow-md mx-auto"
+                     onerror="this.onerror=null;this.src='https://placehold.co/1200x600/EBF4FF/374151?text=Image+Not+Found';">
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results" class="mb-16 scroll-mt-24">
+            <h2 class="section-title">Results & Performance</h2>
+            <div class="grid lg:grid-cols-5 gap-8">
+                <!-- Performance vs Speed Chart -->
+                <div class="lg:col-span-3 card">
+                    <h3 class="text-2xl font-bold text-center mb-4">Performance vs. Speed</h3>
+                    <p class="text-center mb-6">PRIX outperforms or matches multimodal methods like DiffusionDrive while being significantly smaller and faster, operating at a highly competitive framerate.</p>
+                    <img src="figures/performance.png" 
+                         alt="Model Performance vs. Speed Chart" 
+                         class="rounded-lg shadow-md mx-auto"
+                         onerror="this.onerror=null;this.src='https://placehold.co/800x600/EBF4FF/374151?text=Image+Not+Found';">
+                </div>
+                <!-- Key Metrics -->
+                <div class="lg:col-span-2 card bg-slate-100">
+                    <h3 class="text-2xl font-bold text-center mb-6 text-gray-900">Key Benchmarks</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="text-xl font-semibold text-gray-800">NavSim-v1</h4>
+                            <p class="text-4xl font-bold text-blue-600">87.8 <span class="text-2xl font-medium">PDMS</span></p>
+                            <p>Top-performing model, surpassing both camera-only and multimodal competitors.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold text-gray-800">NavSim-v2</h4>
+                            <p class="text-4xl font-bold text-blue-600">84.2 <span class="text-2xl font-medium">EPDMS</span></p>
+                            <p>Achieved the best overall score, solidifying its position as the leading model.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold text-gray-800">nuScenes</h4>
+                             <p class="text-4xl font-bold text-blue-600">0.57m <span class="text-2xl font-medium">Avg. L2 Error</span></p>
+                            <p>Outperforms all existing camera-based baselines with the lowest error and collision rate.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Qualitative Results -->
+        <section id="qualitative" class="mb-16 scroll-mt-24">
+            <h2 class="section-title">Qualitative Results</h2>
+             <p class="text-lg leading-relaxed mb-8 max-w-3xl mx-auto text-center indented-paragraph">
+                Our model correctly handles complex scenarios like busy intersections and can even generate safer trajectories than the ground truth by maintaining a larger safety distance.
+            </p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card">
+                    <img src="figures/qual7.png" alt="Qualitative Result 1" class="rounded-lg shadow-md mx-auto mb-4">
+                    <h3 class="text-xl font-semibold text-center">Safe Intersection Turn</h3>
+                    <p class="text-center">PRIX successfully navigates a busy intersection with a safe and smooth left turn.</p>
+                </div>
+                <div class="card">
+                    <img src="figures/qual9.png" alt="Qualitative Result 2" class="rounded-lg shadow-md mx-auto mb-4">
+                    <h3 class="text-xl font-semibold text-center">Improved Safety Margin</h3>
+                    <p class="text-center">The model generates a trajectory that is safer than the ground truth by keeping a larger distance from other vehicles.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusion Section -->
+        <section id="conclusion" class="mb-16 scroll-mt-24">
+            <div class="card">
+                <!-- <h2 class="section-title">Conclusion</h2> -->
+                <p class="text-lg leading-relaxed max-w-3xl mx-auto text-center indented-paragraph">
+                    We introduced PRIX, an efficient and fast camera-only driving model that outperforms other vision-based methods and rivals the performance of state-of-the-art multimodal systems. While acknowledging LiDAR's importance for robustness, we prove that high performance is achievable with vision alone. PRIX demonstrates that relying directly on rich camera features for planning is a viable alternative to BEV representation and multimodal approaches, establishing a new benchmark for efficient, vision-based autonomous driving.
+                </p>
+            </div>
+        </section>
+
+        <!-- Citation Section
+        <section id="citation" class="mb-16 scroll-mt-24">
+            <div class="card">
+                <h2 class="section-title">Citation</h2>
+                <p class="text-center mb-6">If you find our work useful, please consider citing it:</p>
+                <div class="max-w-2xl mx-auto">
+                    <div class="citation-box">
+@inproceedings{wozniak2025prix,
+  title={PRIX: Learning to Plan from Raw Pixels for End-to-End Autonomous Driving},
+  author={Wozniak, Maciej K. and Liu, Lianhang and Cai, Yixi and Jensfelt, Patric},
+  booktitle={Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
+  year={2025}
+}
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p class="mb-2">Authored by Maciej K. Wozniak, Lianhang Liu, Yixi Cai, and Patric Jensfelt.</p>
+            <p>&copy; 2025 PRIX Project. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
