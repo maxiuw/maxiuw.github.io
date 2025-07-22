@@ -22,9 +22,44 @@
         .indented-paragraph {
             text-indent: 1.5em;
         }
+        
+        /* Animation for the F1 car */
+        @keyframes driveAcross {
+          0% {
+            transform: translateX(-200px) translateY(-50%);
+          }
+          100% {
+            transform: translateX(100vw) translateY(-50%);
+          }
+        }
+
+        #f1-animation-car {
+            position: fixed;
+            top: 50%;
+            left: 0;
+            z-index: 1000; /* High z-index to be on top */
+            display: none; /* Hidden by default */
+        }
+
+        #f1-animation-car.animate {
+            display: block;
+            animation: driveAcross 4s linear forwards;
+        }
+
     </style>
 </head>
 <body class="bg-gray-50 text-gray-700">
+
+    <!-- Animation Overlay -->
+    <div id="animation-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-[999] flex items-center justify-center cursor-pointer">
+        <p class="text-white text-2xl font-bold">Click anywhere to start</p>
+    </div>
+
+    <!-- Animated F1 Car -->
+    <div id="f1-animation-car">
+         <img src="figures/f1_side.png" alt="Animated F1 Car" class="w-24 h-24">
+    </div>
+
 
     <!-- Header -->
     <header class="bg-white shadow-md sticky top-0 z-50">
@@ -35,7 +70,6 @@
                 <a href="#contributions" class="text-gray-600 hover:text-blue-600">Contributions</a>
                 <a href="#architecture" class="text-gray-600 hover:text-blue-600">Architecture</a>
                 <a href="#results" class="text-gray-600 hover:text-blue-600">Results</a>
-                <a href="#citation" class="text-gray-600 hover:text-blue-600">Citation</a>
             </nav>
         </div>
     </header>
@@ -45,15 +79,9 @@
         <!-- Main Title Section -->
         <section class="text-center mb-16">
             <div class="flex items-center justify-center mb-4">
-                 <!-- <div class="w-20 flex-shrink-0 flex justify-end pr-4">
-                    <a href="https://www.flaticon.com/free-icons/formula-1" title="Formula 1 icons created by Darius Dan - Flaticon" target="_blank" rel="noopener noreferrer">
-
-                    <img src="figures/f1.png" alt="Formula 1 Icon" class="w-25 h-25"/>
-                 </div> -->
                  <div class="flex-grow">
                     <h1 class="text-4xl font-extrabold text-gray-900">PRIX: Learning to Plan from Raw Pixels for End-to-End Autonomous Driving</h1>
                  </div>
-                 <!-- <div class="w-20 flex-shrink-0"></div> Spacer to balance the icon -->
             </div>
             <!-- Authors -->
             <div class="mt-4 text-lg text-gray-600">
@@ -74,6 +102,23 @@
                 <a href="diffusion_wacv.pdf" target="_blank" class="bg-gray-700 text-white font-semibold px-8 py-3 rounded-lg hover:bg-gray-800 transition duration-300">
                     Read The Paper (PDF)
                 </a>
+            </div>
+        </section>
+
+        <!-- Teaser Figures Section -->
+        <section id="teaser" class="mb-16 scroll-mt-24">
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card">
+                    <img src="figures/qual3.png" alt="Sharp Right Turn" class="rounded-lg shadow-md mx-auto mb-4">
+                    
+                    <h3 class="text-xl font-semibold text-center">Sharp Right Turn</h3>
+                </div>
+                <div class="card">
+                    <img src="figures/qual7.png" alt="Sharp Left Turn" class="rounded-lg shadow-md mx-auto mb-4">
+                    <h3 class="text-xl font-semibold text-center">Safe Intersection Turn</h3>
+                    <!-- <p class="text-center">PRIX successfully navigates a busy intersection with a safe and smooth left turn.</p> -->
+                    <!-- <h3 class="text-xl font-semibold text-center">Sharp Left Turn</h3> -->
+                </div>
             </div>
         </section>
 
@@ -169,9 +214,9 @@
             </p>
             <div class="grid md:grid-cols-2 gap-8">
                 <div class="card">
-                    <img src="figures/qual7.png" alt="Qualitative Result 1" class="rounded-lg shadow-md mx-auto mb-4">
-                    <h3 class="text-xl font-semibold text-center">Safe Intersection Turn</h3>
-                    <p class="text-center">PRIX successfully navigates a busy intersection with a safe and smooth left turn.</p>
+                    <img src="figures/qual5.png" alt="Qualitative Result 1" class="rounded-lg shadow-md mx-auto mb-4">
+                    <h3 class="text-xl font-semibold text-center">Sharp Left Turn</h3>
+                    <!-- <p class="text-center">PRIX successfully navigates a busy intersection with a safe and smooth left turn.</p> -->
                 </div>
                 <div class="card">
                     <img src="figures/qual9.png" alt="Qualitative Result 2" class="rounded-lg shadow-md mx-auto mb-4">
@@ -184,30 +229,12 @@
         <!-- Conclusion Section -->
         <section id="conclusion" class="mb-16 scroll-mt-24">
             <div class="card">
-                <!-- <h2 class="section-title">Conclusion</h2> -->
+                <h2 class="section-title">Conclusion</h2>
                 <p class="text-lg leading-relaxed max-w-3xl mx-auto text-center indented-paragraph">
                     We introduced PRIX, an efficient and fast camera-only driving model that outperforms other vision-based methods and rivals the performance of state-of-the-art multimodal systems. While acknowledging LiDAR's importance for robustness, we prove that high performance is achievable with vision alone. PRIX demonstrates that relying directly on rich camera features for planning is a viable alternative to BEV representation and multimodal approaches, establishing a new benchmark for efficient, vision-based autonomous driving.
                 </p>
             </div>
         </section>
-
-        <!-- Citation Section
-        <section id="citation" class="mb-16 scroll-mt-24">
-            <div class="card">
-                <h2 class="section-title">Citation</h2>
-                <p class="text-center mb-6">If you find our work useful, please consider citing it:</p>
-                <div class="max-w-2xl mx-auto">
-                    <div class="citation-box">
-@inproceedings{wozniak2025prix,
-  title={PRIX: Learning to Plan from Raw Pixels for End-to-End Autonomous Driving},
-  author={Wozniak, Maciej K. and Liu, Lianhang and Cai, Yixi and Jensfelt, Patric},
-  booktitle={Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
-  year={2025}
-}
-                    </div>
-                </div>
-            </div>
-        </section> -->
 
     </main>
 
@@ -219,5 +246,44 @@
         </div>
     </footer>
 
+    <script>
+        // Get references to the animation elements
+        const overlay = document.getElementById('animation-overlay');
+        const car = document.getElementById('f1-animation-car');
+
+        // --- Audio Setup ---
+        // Create an Audio object for the local MP3 file.
+        // This will not work in the preview but is set up for your local environment.
+        const raceSound = new Audio('figures/Voicy_Absolutely incredible.mp3');
+
+
+        // --- Animation Logic ---
+        // Function to start the animation
+        function startAnimation() {
+            // Play the sound. A `try...catch` block is used to prevent errors
+            // in environments where autoplay might fail.
+            try {
+                raceSound.play();
+            } catch (error) {
+                console.error("Audio playback failed:", error);
+            }
+            
+            // Add the 'animate' class to start the CSS animation
+            car.classList.add('animate');
+            
+            // Hide the overlay
+            overlay.style.display = 'none';
+
+            // Remove the car from the DOM after the animation is complete
+            setTimeout(() => {
+                if (car) {
+                    car.remove();
+                }
+            }, 4000); // Matches the 4s animation duration
+        }
+
+        // Add a one-time click listener to the overlay
+        overlay.addEventListener('click', startAnimation, { once: true });
+    </script>
 </body>
 </html>
