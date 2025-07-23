@@ -10,9 +10,7 @@
         body {
             font-family: 'Inter', sans-serif;
         }
-        .section-title {
-            @apply text-3xl font-bold text-gray-800 mb-6 text-center;
-        }
+
         .card {
             @apply bg-white rounded-2xl shadow-lg overflow-hidden p-6 md:p-8;
         }
@@ -79,9 +77,15 @@
         <!-- Main Title Section -->
         <section class="text-center mb-16">
             <div class="flex items-center justify-center mb-4">
+                 <div class="w-24 flex-shrink-0 flex justify-end pr-4">
+                    <a href="https://www.flaticon.com/free-icons/formula-1" title="Formula 1 icons created by Darius Dan - Flaticon" target="_blank" rel="noopener noreferrer">
+                        <img src="figures/f1.png" alt="Formula 1 Icon" class="w-20 h-20"/>
+                    </a>
+                 </div>
                  <div class="flex-grow">
                     <h1 class="text-4xl font-extrabold text-gray-900">PRIX: Learning to Plan from Raw Pixels for End-to-End Autonomous Driving</h1>
                  </div>
+                 <div class="w-24 flex-shrink-0"></div> <!-- Spacer to balance the icon -->
             </div>
             <!-- Authors -->
             <div class="mt-4 text-lg text-gray-600">
@@ -116,8 +120,6 @@
                 <div class="card">
                     <img src="figures/qual7.png" alt="Sharp Left Turn" class="rounded-lg shadow-md mx-auto mb-4">
                     <h3 class="text-xl font-semibold text-center">Safe Intersection Turn</h3>
-                    <!-- <p class="text-center">PRIX successfully navigates a busy intersection with a safe and smooth left turn.</p> -->
-                    <!-- <h3 class="text-xl font-semibold text-center">Sharp Left Turn</h3> -->
                 </div>
             </div>
         </section>
@@ -125,7 +127,6 @@
         <!-- Abstract Section -->
         <section id="abstract" class="mb-16 scroll-mt-24">
             <div class="card">
-                <h2 class="section-title">Abstract</h2>
                 <p class="text-lg leading-relaxed indented-paragraph">
                     While end-to-end autonomous driving models show promising results, their practical deployment is often hindered by large model sizes, a reliance on expensive LiDAR sensors, and computationally intensive BEV feature representations. This limits their scalability, especially for mass-market vehicles equipped only with cameras. To address these challenges, we propose PRIX (Plan from Raw Pixels). Our novel and efficient end-to-end driving architecture operates using only camera data, without explicit BEV representation and forgoing the need for LiDAR. PRIX leverages a visual feature extractor coupled with a generative planning head to predict safe trajectories from raw pixel inputs directly. A core component of our architecture is the Context-aware Recalibration Transformer (CaRT), a novel module designed to effectively enhance multi-level visual features for more robust planning. We demonstrate through comprehensive experiments that PRIX achieves state-of-the-art performance on the NavSim and nuScenes benchmarks, matching the capabilities of larger, multimodal diffusion planners while being significantly more efficient in terms of inference speed and model size, making it a practical solution for real-world deployment.
                 </p>
@@ -134,7 +135,6 @@
 
         <!-- Contributions Section -->
         <section id="contributions" class="mb-16 scroll-mt-24">
-            <h2 class="section-title">Key Contributions</h2>
             <div class="grid md:grid-cols-2 gap-8">
                 <div class="card">
                     <h3 class="text-xl font-semibold mb-3 text-blue-600">High Efficiency</h3>
@@ -158,7 +158,6 @@
         <!-- Architecture Section -->
         <section id="architecture" class="mb-16 scroll-mt-24">
              <div class="card">
-                <h2 class="section-title">Architecture Overview</h2>
                 <p class="text-lg leading-relaxed mb-8 max-w-3xl mx-auto text-center indented-paragraph">
                     PRIX's architecture processes multi-camera images through a visual backbone featuring our novel CaRT module. These enhanced visual features, combined with the vehicle's state and noisy anchors, are fed into a conditional diffusion planner to generate the final, safe trajectory.
                 </p>
@@ -171,7 +170,6 @@
 
         <!-- Results Section -->
         <section id="results" class="mb-16 scroll-mt-24">
-            <h2 class="section-title">Results & Performance</h2>
             <div class="grid lg:grid-cols-5 gap-8">
                 <!-- Performance vs Speed Chart -->
                 <div class="lg:col-span-3 card">
@@ -208,7 +206,6 @@
 
         <!-- Qualitative Results -->
         <section id="qualitative" class="mb-16 scroll-mt-24">
-            <h2 class="section-title">Qualitative Results</h2>
              <p class="text-lg leading-relaxed mb-8 max-w-3xl mx-auto text-center indented-paragraph">
                 Our model correctly handles complex scenarios like busy intersections and can even generate safer trajectories than the ground truth by maintaining a larger safety distance.
             </p>
@@ -216,7 +213,6 @@
                 <div class="card">
                     <img src="figures/qual5.png" alt="Qualitative Result 1" class="rounded-lg shadow-md mx-auto mb-4">
                     <h3 class="text-xl font-semibold text-center">Sharp Left Turn</h3>
-                    <!-- <p class="text-center">PRIX successfully navigates a busy intersection with a safe and smooth left turn.</p> -->
                 </div>
                 <div class="card">
                     <img src="figures/qual9.png" alt="Qualitative Result 2" class="rounded-lg shadow-md mx-auto mb-4">
@@ -229,7 +225,6 @@
         <!-- Conclusion Section -->
         <section id="conclusion" class="mb-16 scroll-mt-24">
             <div class="card">
-                <h2 class="section-title">Conclusion</h2>
                 <p class="text-lg leading-relaxed max-w-3xl mx-auto text-center indented-paragraph">
                     We introduced PRIX, an efficient and fast camera-only driving model that outperforms other vision-based methods and rivals the performance of state-of-the-art multimodal systems. While acknowledging LiDAR's importance for robustness, we prove that high performance is achievable with vision alone. PRIX demonstrates that relying directly on rich camera features for planning is a viable alternative to BEV representation and multimodal approaches, establishing a new benchmark for efficient, vision-based autonomous driving.
                 </p>
