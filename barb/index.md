@@ -1,3 +1,13 @@
+<style>
+/* Hide the top navbar only on this page */
+nav.navbar,
+header.site-header,
+#navbar { display: none !important; }
+
+/* Remove the extra top spacing left by the fixed navbar */
+body { padding-top: 0 !important; }
+main, .page-content, .content { margin-top: 0 !important; padding-top: 0 !important; }
+</style>
 ---
 layout: page
 title: For Barb
