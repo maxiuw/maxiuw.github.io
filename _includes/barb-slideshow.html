@@ -1,0 +1,88 @@
+<div id="barb-root" class="barb-wrapper" aria-live="polite">
+<div class="barb-stage">
+<img id="barb-image" alt="Family photo for Barb" />
+<div id="barb-caption" class="barb-caption"></div>
+</div>
+<div class="barb-controls">
+<button id="barb-prev" aria-label="Previous">&#9664; Prev</button>
+<button id="barb-next" aria-label="Next">Next &#9654;</button>
+</div>
+</div>
+
+
+<style>
+.barb-wrapper { max-width: 900px; margin: 0 auto; padding: 1rem; }
+.barb-stage { position: relative; display: flex; flex-direction: column; align-items: center; }
+.barb-stage img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+.barb-caption {
+margin-top: 0.75rem; font-size: 1.05rem; line-height: 1.5; text-align: center;
+white-space: pre-wrap;
+}
+.barb-controls { display: flex; justify-content: center; gap: 1rem; margin-top: 0.5rem; }
+.barb-controls button { padding: 0.4rem 0.8rem; cursor: pointer; }
+</style>
+
+
+<script>
+(function () {
+const slides = Array.isArray(window.BARB_SLIDES) ? window.BARB_SLIDES : [];
+const intervalSec = Number(window.BARB_AUTOPLAY_SECONDS || 12);
+
+
+const imgEl = document.getElementById('barb-image');
+const capEl = document.getElementById('barb-caption');
+const prevBtn = document.getElementById('barb-prev');
+const nextBtn = document.getElementById('barb-next');
+
+
+let idx = 0; let timer = null;
+
+
+function render(i) {
+if (!slides.length) return;
+const s = slides[i];
+if (s.image) imgEl.src = s.image; else imgEl.removeAttribute('src');
+capEl.textContent = s.text || '';
+}
+
+
+function goTo(n) {
+if (!slides.length) return;
+idx = (n + slides.length) % slides.length;
+render(idx);
+restartAutoplay();
+}
+
+
+function next() { goTo(idx + 1); }
+function prev() { goTo(idx - 1); }
+
+
+function startAutoplay() {
+if (timer) clearInterval(timer);
+if (slides.length > 1 && intervalSec > 0) {
+timer = setInterval(next, intervalSec * 1000);
+}
+}
+
+
+function restartAutoplay() { startAutoplay(); }
+
+
+// keyboard arrows
+document.addEventListener('keydown', (e) => {
+if (e.key === 'ArrowRight') next();
+else if (e.key === 'ArrowLeft') prev();
+});
+
+
+// Pause on hover (optional nice-to-have)
+const root = document.getElementById('barb-root');
+root.addEventListener('mouseenter', () => timer && clearInterval(timer));
+root.addEventListener('mouseleave', startAutoplay);
+
+
+// init
+if (slides.length) { render(0); startAutoplay(); }
+})();
+</script>

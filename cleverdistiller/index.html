@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CleverDistiller: Project Page</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .section-title {
+            @apply text-3xl font-bold text-slate-800 mb-2 text-center;
+        }
+        .section-subtitle {
+            @apply text-lg text-slate-500 mb-12 text-center max-w-3xl mx-auto;
+        }
+        .card {
+            @apply bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300;
+        }
+    </style>
+</head>
+<body class="text-slate-700">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-slate-800">CleverDistiller</h1>
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="#abstract" class="text-slate-600 hover:text-blue-600 transition-colors">Abstract</a>
+                <a href="#contributions" class="text-slate-600 hover:text-blue-600 transition-colors">Contributions</a>
+                <a href="#method" class="text-slate-600 hover:text-blue-600 transition-colors">Method</a>
+                <a href="#results" class="text-slate-600 hover:text-blue-600 transition-colors">Results</a>
+                <a href="#paper" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors shadow">Read Paper</a>
+            </div>
+            <!-- Mobile Menu Button (optional) -->
+            <button class="md:hidden text-slate-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="py-20 text-center bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4">CleverDistiller: Simple and Spatially Consistent Cross-modal Distillation</h2>
+                <p class="text-xl text-slate-600 mb-2">BMVC 2025 Submission #479</p>
+                <p class="text-lg text-slate-500">Authors: [Your Name(s) Here]</p>
+            </div>
+        </section>
+
+        <!-- Abstract Section -->
+        <section id="abstract" class="py-20">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <h3 class="section-title">Abstract</h3>
+                <div class="bg-white p-8 rounded-xl shadow-lg text-lg leading-relaxed text-slate-600">
+                    <p>Vision foundation models have revolutionized 2D camera-based perception by extracting generalized features for downstream tasks. Recent work applies self-supervised cross-modal knowledge distillation (KD) to transfer these capabilities to 3D LiDAR models, but often relies on complex losses or pseudo-semantic maps. We introduce <strong>CleverDistiller</strong>, a self-supervised, cross-modal 2D-to-3D KD framework that introduces simple yet effective design choices. Our method uses a direct feature similarity loss and an MLP projection head to capture complex semantic dependencies without relying on pseudo-semantic maps or explicit semantic supervision. In addition, we improve the 3D spatial reasoning capabilities of learned representations through a self-supervised occupancy prediction task. Experiments on autonomous driving benchmarks show that CleverDistiller achieves state-of-the-art performance in both 3D semantic segmentation and 3D object detection, with up to <strong class="text-blue-600">10% mIoU improvement</strong>, particularly when fine-tuning with limited data, demonstrating the effectiveness of our approach.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contributions Section -->
+        <section id="contributions" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h3 class="section-title">Core Contributions 💡</h3>
+                <p class="section-subtitle">Our work introduces a simple yet powerful framework for distilling knowledge from 2D Vision Foundation Models (VFMs) to 3D LiDAR networks.</p>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Contribution 1 -->
+                    <div class="card">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600 mb-4">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-800 mb-2">Simplified Distillation</h4>
+                        <p>We introduce a **non-linear MLP projection head**, allowing the model to learn more informative features without complex losses or semantic priors—a key limitation overlooked by previous methods.</p>
+                    </div>
+                    <!-- Contribution 2 -->
+                    <div class="card">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-green-100 text-green-600 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-800 mb-2">Enhanced Spatial Reasoning</h4>
+                        <p>A **self-supervised occupancy prediction task** complements the semantic knowledge, encouraging the LiDAR model to learn crucial spatial and geometric information for more robust 3D representations.</p>
+                    </div>
+                    <!-- Contribution 3 -->
+                    <div class="card">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-purple-100 text-purple-600 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-800 mb-2">SOTA Performance</h4>
+                        <p>Our method sets a new state-of-the-art, especially in **low-data regimes**, and demonstrates superior generalization and robustness across various datasets and under data corruption.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Method Section -->
+        <section id="method" class="py-20">
+            <div class="container mx-auto px-6">
+                <h3 class="section-title">Our Method</h3>
+                <p class="section-subtitle">CleverDistiller distills knowledge from a 2D VFM teacher to a 3D LiDAR student using a simple feature similarity loss, an MLP projection head, and an auxiliary spatial task.</p>
+                <div class="bg-white rounded-xl shadow-lg p-4">
+                    <img src="https://placehold.co/1200x550/e2e8f0/4a5568?text=CleverDistiller+Pipeline+(Fig.2)" 
+                         alt="CleverDistiller Pipeline Diagram from the paper"
+                         class="rounded-lg w-full"
+                         onerror="this.onerror=null;this.src='https://placehold.co/1200x550/e2e8f0/4a5568?text=Image+Not+Found';">
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h3 class="section-title">Key Results & Findings 📊</h3>
+                <p class="section-subtitle">Our method achieves significant improvements in performance, robustness, and generalization across multiple benchmarks.</p>
+                
+                <!-- Finding 1: MLP Power -->
+                <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
+                    <div>
+                        <h4 class="text-2xl font-bold text-slate-800 mb-4">1. The Power of the MLP Projection Head</h4>
+                        <p class="mb-4">Our ablation studies clearly show that using an MLP projection head instead of a linear one is critical. The MLP leads to more informative 3D backbone features (measured by the **RankMe metric**), which directly correlates with better downstream performance.</p>
+                        <p class="text-blue-600 font-semibold text-xl">A 3-layer MLP provided a ~4% mIoU boost on nuScenes (1% fine-tuning) compared to a simple linear projection.</p>
+                    </div>
+                    <div class="card p-4">
+                        <img src="https://placehold.co/600x400/e2e8f0/4a5568?text=mIoU+vs+RankMe+(Fig.3)" alt="Graph showing mIoU vs RankMe metric" class="rounded-lg w-full" onerror="this.onerror=null;this.src='https://placehold.co/600x400/e2e8f0/4a5568?text=Image+Not+Found';">
+                    </div>
+                </div>
+
+                <!-- Finding 2: SOTA Segmentation -->
+                <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
+                    <div class="md:order-2">
+                        <h4 class="text-2xl font-bold text-slate-800 mb-4">2. State-of-the-Art Semantic Segmentation</h4>
+                        <p class="mb-4">CleverDistiller consistently outperforms previous methods. When fine-tuned on only **1% of nuScenes data**, our method achieves **59.8% mIoU**, a significant leap from the baseline ScaLR's 55.8% and other methods like SuperFlow's 48.1%.</p>
+                        <p>The benefits hold when using larger teacher models and advanced 3D backbones, demonstrating the scalability of our approach.</p>
+                    </div>
+                    <div class="card p-4 md:order-1">
+                         <img src="https://placehold.co/800x600/e2e8f0/4a5568?text=Semantic+Segmentation+Results+(Table+4)" alt="Table of semantic segmentation results" class="rounded-lg w-full" onerror="this.onerror=null;this.src='https://placehold.co/800x600/e2e8f0/4a5568?text=Image+Not+Found';">
+                    </div>
+                </div>
+
+                <!-- Finding 3: Robustness -->
+                <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
+                    <div>
+                        <h4 class="text-2xl font-bold text-slate-800 mb-4">3. Superior Robustness & Generalization</h4>
+                        <p class="mb-4">On the nuScenes-C benchmark, which introduces corruptions like fog and rain, CleverDistiller achieves the **lowest mean Corruption Error (mCE)** and **highest mean Resilience Rate (mRR)**.</p>
+                        <p class="text-green-600 font-semibold text-xl">The improvement is most dramatic in the cross-sensor scenario (extremely sparse LiDAR), where our model is up to 20% better than others.</p>
+                    </div>
+                    <div class="card p-4">
+                        <img src="https://placehold.co/800x400/e2e8f0/4a5568?text=Robustness+Results+(Table+7)" alt="Table of robustness results" class="rounded-lg w-full" onerror="this.onerror=null;this.src='https://placehold.co/800x400/e2e8f0/4a5568?text=Image+Not+Found';">
+                    </div>
+                </div>
+
+                <!-- Finding 4: Qualitative -->
+                <div>
+                    <h4 class="text-2xl font-bold text-slate-800 mb-4 text-center">4. Qualitative Improvements</h4>
+                    <p class="text-lg text-slate-500 mb-8 text-center max-w-3xl mx-auto">Visually, our method produces cleaner and more spatially consistent semantic maps with fewer errors along object boundaries, which is critical for real-world applications.</p>
+                    <div class="card p-4">
+                        <img src="https://placehold.co/1000x400/e2e8f0/4a5568?text=Qualitative+Comparison+(Fig.1)" alt="Qualitative comparison between ScaLR and CleverDistiller" class="rounded-lg w-full" onerror="this.onerror=null;this.src='https://placehold.co/1000x400/e2e8f0/4a5568?text=Image+Not+Found';">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Conclusion & Paper Link Section -->
+        <section id="paper" class="py-20">
+            <div class="container mx-auto px-6 text-center">
+                 <h3 class="section-title">Conclusion</h3>
+                 <p class="section-subtitle max-w-4xl">CleverDistiller demonstrates that complexity is not always the answer. Through two simple yet effective design choices—an **MLP projection head** and an **auxiliary occupancy task**—we significantly advance the state of the art in cross-modal 2D-to-3D knowledge distillation. Our method is not only simpler and more efficient but also produces more robust, generalizable, and powerful 3D representations.</p>
+                 <a href="#" class="inline-block bg-blue-600 text-white text-lg font-semibold px-8 py-4 rounded-lg hover:bg-blue-700 transition-transform hover:scale-105 shadow-lg">
+                    Read the Full Paper (PDF)
+                 </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-slate-400">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <p>&copy; 2025 [Your Name/Institution]. All Rights Reserved.</p>
+            <p class="text-sm mt-2">Webpage template generated by Gemini.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

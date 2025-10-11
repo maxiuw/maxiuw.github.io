@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-I gave a talk on ''Self – supervised learning for autonomous driving perception'' to different teams at Qualcomm, Zenseact and Scania! Slides available [here](https://docs.google.com/presentation/d/1xyktf3oszWmSxJHr5cHhodDDSJciPbcVgPfyjedDAfY/edit?usp=sharing).
+I gave a talk on ''Self – supervised learning for autonomous driving perception'' to different teams at Qualcomm, zenseact and Scania! Slides available [here](https://docs.google.com/presentation/d/1xyktf3oszWmSxJHr5cHhodDDSJciPbcVgPfyjedDAfY/edit?usp=sharing).
