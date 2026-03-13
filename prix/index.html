@@ -21,7 +21,6 @@
             text-indent: 1.5em;
         }
         
-        /* Animation for the F1 car */
         @keyframes driveAcross {
           0% {
             transform: translateX(-200px) translateY(-50%);
@@ -35,8 +34,8 @@
             position: fixed;
             top: 50%;
             left: 0;
-            z-index: 1000; /* High z-index to be on top */
-            display: none; /* Hidden by default */
+            z-index: 1000;
+            display: none;
         }
 
         #f1-animation-car.animate {
@@ -44,22 +43,39 @@
             animation: driveAcross 4s linear forwards;
         }
 
+        /* === NEW TABLE STYLE === */
+        .styled-table {
+            @apply w-full text-left border-collapse;
+        }
+        .styled-table thead th {
+            @apply text-sm font-semibold text-gray-700 p-4 border-b-2 border-gray-200;
+        }
+        .styled-table tbody td {
+            @apply text-sm text-gray-800 p-4;
+        }
+        .styled-table tbody tr:nth-child(even) {
+             @apply bg-gray-50; /* Alternating row color */
+        }
+        .styled-table caption {
+            @apply text-base text-gray-700 mb-4 font-medium text-center;
+        }
+        .table-wrapper {
+            @apply overflow-x-auto shadow-md rounded-lg mb-6 bg-white;
+        }
+        /* === END NEW STYLE === */
+
     </style>
 </head>
 <body class="bg-gray-50 text-gray-700">
 
-    <!-- Animation Overlay -->
     <div id="animation-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-[999] flex items-center justify-center cursor-pointer">
         <p class="text-white text-2xl font-bold">Click anywhere to start</p>
     </div>
 
-    <!-- Animated F1 Car -->
     <div id="f1-animation-car">
          <img src="figures/f1_side.png" alt="Animated F1 Car" class="w-24 h-24">
     </div>
 
-
-    <!-- Header -->
     <header class="bg-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <h1 class="text-2xl font-bold text-gray-900">PRIX Project</h1>
@@ -68,53 +84,38 @@
                 <a href="#contributions" class="text-gray-600 hover:text-blue-600">Contributions</a>
                 <a href="#architecture" class="text-gray-600 hover:text-blue-600">Architecture</a>
                 <a href="#results" class="text-gray-600 hover:text-blue-600">Results</a>
+                <a href="#additional-experiments" class="text-gray-600 hover:text-blue-600">Experiments</a>
             </nav>
         </div>
     </header>
 
     <main class="container mx-auto px-6 py-12">
 
-        <!-- Main Title Section -->
         <section class="text-center mb-16">
             <div class="flex items-center justify-center mb-4">
                  <div class="w-24 flex-shrink-0 flex justify-end pr-4">
-                    <a href="https://www.flaticon.com/free-icons/formula-1" title="Formula 1 icons created by Darius Dan - Flaticon" target="_blank" rel="noopener noreferrer">
-                        <img src="figures/f1.png" alt="Formula 1 Icon" class="w-20 h-20"/>
-                    </a>
+                    <img src="figures/f1.png" alt="Formula 1 Icon" class="w-20 h-20"/>
                  </div>
                  <div class="flex-grow">
                     <h1 class="text-4xl font-extrabold text-gray-900">PRIX: Learning to Plan from Raw Pixels for End-to-End Autonomous Driving</h1>
                  </div>
-                 <div class="w-24 flex-shrink-0"></div> <!-- Spacer to balance the icon -->
+                 <div class="w-24 flex-shrink-0"></div>
             </div>
-            <!-- Authors -->
             <div class="mt-4 text-lg text-gray-600">
-                <span class="font-medium">Maciej K. Wozniak¹</span>,
-                <span class="font-medium">Lianhang Liu²</span>,
-                <span class="font-medium">Yixi Cai¹</span>,
-                <span class="font-medium">Patric Jensfelt¹</span>
+                <span class="font-medium">Authors anonymized for double-blind review</span>
             </div>
-            <div class="mt-2 text-md text-gray-500">
-                <span>¹KTH Royal Institute of Technology, Sweden</span> &nbsp;&nbsp;
-                <span>²Scania CV AB</span>
-            </div>
-            <p class="text-xl text-gray-600 max-w-3xl mx-auto mt-6">An efficient, camera-only, end-to-end autonomous driving model that achieves state-of-the-art performance without LiDAR or explicit BEV representations.</p>
-            <div class="mt-8 flex justify-center space-x-4">
-                <a href="https://github.com/maxiuw/prix" target="_blank" class="bg-blue-600 text-white font-semibold px-8 py-3 rounded-lg hover:bg-blue-700 transition duration-300">
-                    Code
-                </a>
-                <a href="diffusion_wacv.pdf" target="_blank" class="bg-gray-700 text-white font-semibold px-8 py-3 rounded-lg hover:bg-gray-800 transition duration-300">
-                    Read The Paper (PDF)
-                </a>
-            </div>
-        </section>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto mt-6">
+                An efficient, camera-only, end-to-end autonomous driving model that achieves state-of-the-art performance without LiDAR or explicit BEV representations.
+            </p>
+            <p class="text-lg text-blue-600 font-medium max-w-3xl mx-auto mt-4">
+                Code will be available upon publication.
+            </p>
+            </section>
 
-        <!-- Teaser Figures Section -->
         <section id="teaser" class="mb-16 scroll-mt-24">
             <div class="grid md:grid-cols-2 gap-8">
                 <div class="card">
                     <img src="figures/qual3.png" alt="Sharp Right Turn" class="rounded-lg shadow-md mx-auto mb-4">
-                    
                     <h3 class="text-xl font-semibold text-center">Sharp Right Turn</h3>
                 </div>
                 <div class="card">
@@ -124,7 +125,6 @@
             </div>
         </section>
 
-        <!-- Abstract Section -->
         <section id="abstract" class="mb-16 scroll-mt-24">
             <div class="card">
                 <p class="text-lg leading-relaxed indented-paragraph">
@@ -133,7 +133,6 @@
             </div>
         </section>
 
-        <!-- Contributions Section -->
         <section id="contributions" class="mb-16 scroll-mt-24">
             <div class="grid md:grid-cols-2 gap-8">
                 <div class="card">
@@ -155,7 +154,6 @@
             </div>
         </section>
 
-        <!-- Architecture Section -->
         <section id="architecture" class="mb-16 scroll-mt-24">
              <div class="card">
                 <p class="text-lg leading-relaxed mb-8 max-w-3xl mx-auto text-center indented-paragraph">
@@ -164,23 +162,20 @@
                 <img src="figures/main.png" 
                      alt="PRIX Architecture Diagram" 
                      class="rounded-lg shadow-md mx-auto"
-                     onerror="this.onerror=null;this.src='https://placehold.co/1200x600/EBF4FF/374151?text=Image+Not+Found';">
+                     onerror="this.onerror=null;this.src='httpshttps://placehold.co/1200x600/EBF4FF/374151?text=Image+Not+Found';">
             </div>
         </section>
 
-        <!-- Results Section -->
         <section id="results" class="mb-16 scroll-mt-24">
             <div class="grid lg:grid-cols-5 gap-8">
-                <!-- Performance vs Speed Chart -->
                 <div class="lg:col-span-3 card">
                     <h3 class="text-2xl font-bold text-center mb-4">Performance vs. Speed</h3>
                     <p class="text-center mb-6">PRIX outperforms or matches multimodal methods like DiffusionDrive while being significantly smaller and faster, operating at a highly competitive framerate.</p>
                     <img src="figures/performance.png" 
                          alt="Model Performance vs. Speed Chart" 
                          class="rounded-lg shadow-md mx-auto"
-                         onerror="this.onerror=null;this.src='https://placehold.co/800x600/EBF4FF/374151?text=Image+Not+Found';">
+                         onerror="this.onerror=null;this.src='httpshttps://placehold.co/800x600/EBF4FF/374151?text=Image+Not+Found';">
                 </div>
-                <!-- Key Metrics -->
                 <div class="lg:col-span-2 card bg-slate-100">
                     <h3 class="text-2xl font-bold text-center mb-6 text-gray-900">Key Benchmarks</h3>
                     <div class="space-y-6">
@@ -204,7 +199,6 @@
             </div>
         </section>
 
-        <!-- Qualitative Results -->
         <section id="qualitative" class="mb-16 scroll-mt-24">
              <p class="text-lg leading-relaxed mb-8 max-w-3xl mx-auto text-center indented-paragraph">
                 Our model correctly handles complex scenarios like busy intersections and can even generate safer trajectories than the ground truth by maintaining a larger safety distance.
@@ -222,62 +216,507 @@
             </div>
         </section>
 
-        <!-- Conclusion Section -->
-        <section id="conclusion" class="mb-16 scroll-mt-24">
+        <section id="weather-results" class="mb-16 scroll-mt-24">
             <div class="card">
-                <p class="text-lg leading-relaxed max-w-3xl mx-auto text-center indented-paragraph">
-                    We introduced PRIX, an efficient and fast camera-only driving model that outperforms other vision-based methods and rivals the performance of state-of-the-art multimodal systems. While acknowledging LiDAR's importance for robustness, we prove that high performance is achievable with vision alone. PRIX demonstrates that relying directly on rich camera features for planning is a viable alternative to BEV representation and multimodal approaches, establishing a new benchmark for efficient, vision-based autonomous driving.
+                <h2 class="text-2xl font-bold text-center mb-6">Robustness to Weather Conditions</h2>
+                <p class="text-lg leading-relaxed mb-8 max-w-3xl mx-auto text-center">
+                    PRIX demonstrates strong robustness, generating consistent and safe trajectories across clear, rainy, and snowy conditions.
                 </p>
+
+                <h3 class="text-xl font-semibold text-center mb-6">Weather Example</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    
+                    <div class="font-semibold text-lg">Left Camera (l0)</div>
+                    <div class="font-semibold text-lg">Front Camera (f0)</div>
+                    <div class="font-semibold text-lg">Right Camera (r0)</div>
+                    <h3 class="col-span-3 text-xl font-semibold mt-6">Clean</h3>
+                    <img src="figures/weather/8cec7d21f7dc540b/8cec7d21f7dc540b_0003_l0.png" alt="Left Camera Clean" class="rounded-lg shadow-md w-full">
+                    <img src="figures/weather/8cec7d21f7dc540b/8cec7d21f7dc540b_0003_f0.png" alt="Front Camera Clean" class="rounded-lg shadow-md w-full">
+                    <img src="figures/weather/8cec7d21f7dc540b/8cec7d21f7dc540b_0003_r0.png" alt="Right Camera Clean" class="rounded-lg shadow-md w-full">
+                    <h3 class="col-span-3 text-xl font-semibold mt-6">Rainy</h3>
+                    <img src="figures/weather/8cec7d21f7dc540b/8cec7d21f7dc540b_0003_l0_rain.png" alt="Left Camera Rain" class="rounded-lg shadow-md w-full">
+                    <img src="figures/weather/8cec7d21f7dc540b/8cec7d21f7dc540b_0003_f0_rain.png" alt="Front Camera Rain" class="rounded-lg shadow-md w-full">
+                    <img src="figures/weather/8cec7d21f7dc540b/8cec7d21f7dc540b_0003_r0_rain.png" alt="Right Camera Rain" class="rounded-lg shadow-md w-full">
+                    <h3 class="col-span-3 text-xl font-semibold mt-6">Snowy</h3>
+                    <img src="figures/weather/8cec7d21f7dc540b/8cec7d21f7dc540b_0003_l0_snow.png" alt="Left Camera Snow" class="rounded-lg shadow-md w-full">
+                    <img src="figures/weather/8cec7d21f7dc540b/8cec7d21f7dc540b_0003_f0_snow.png" alt="Front Camera Snow" class="rounded-lg shadow-md w-full">
+                    <img src="figures/weather/8cec7d21f7dc540b/8cec7d21f7dc540b_0003_r0_snow.png" alt="Right Camera Snow" class="rounded-lg shadow-md w-full">
+
+                </div>
+
+                <h3 class="text-xl font-semibold text-center mt-12 mb-4">Corresponding Model Predictions (Example 1)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div>
+                        <h4 class="font-medium mb-2">Clean Prediction</h4>
+                        <img src="figures/weather/8cec7d21f7dc540b/pred_clean.png" alt="Clean Prediction" class="rounded-lg shadow-md w-full">
+                    </div>
+                    <div>
+                        <h4 class="font-medium mb-2">Rain Prediction</h4>
+                        <img src="figures/weather/8cec7d21f7dc540b/pred_rain.png" alt="Rain Prediction" class="rounded-lg shadow-md w-full">
+                    </div>
+                    <div>
+                        <h4 class="font-medium mb-2">Snow Prediction</h4>
+                        <img src="figures/weather/8cec7d21f7dc540b/pred_snow.png" alt="Snow Prediction" class="rounded-lg shadow-md w-full">
+                    </div>
+                </div>
+
+                <hr class="my-12 border-gray-300">
+
+                <h3 class="text-xl font-semibold text-center mb-6">Weather Example 2</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+
+                    <div class="font-semibold text-lg">Left Camera (l0)</div>
+                    <div class="font-semibold text-lg">Front Camera (f0)</div>
+                    <div class="font-semibold text-lg">Right Camera (r0)</div>
+                    <h3 class="col-span-3 text-xl font-semibold mt-6">Clean</h3>
+                    <img src="figures/weather/91aeae3843455c34/91aeae3843455c34_0003_l0.png" alt="Left Camera Clean" class="rounded-lg shadow-md w-full">
+                    <img src="figures/weather/91aeae3843455c34/91aeae3843455c34_0003_f0.png" alt="Front Camera Clean" class="rounded-lg shadow-md w-full">
+                    <img src="figures/weather/91aeae3843455c34/91aeae3843455c34_0003_r0.png" alt="Right Camera Clean" class="rounded-lg shadow-md w-full">
+                    <h3 class="col-span-3 text-xl font-semibold mt-6">Rainy</h3>
+                    <img src="figures/weather/91aeae3843455c34/91aeae3843455c34_0003_l0_rain.png" alt="Left Camera Rain" class="rounded-lg shadow-md w-full">
+                    <img src="figures/weather/91aeae3843455c34/91aeae3843455c34_0003_f0_rain.png" alt="Front Camera Rain" class="rounded-lg shadow-md w-full">
+                    <img src="figures/weather/91aeae3843455c34/91aeae3843455c34_0003_r0_rain.png" alt="Right Camera Rain" class="rounded-lg shadow-md w-full">
+                    <h3 class="col-span-3 text-xl font-semibold mt-6">Snowy</h3>
+                    <img src="figures/weather/91aeae3843455c34/91aeae3843455c34_0003_l0_snow.png" alt="Left Camera Snow" class="rounded-lg shadow-md w-full">
+                    <img src="figures/weather/91aeae3843455c34/91aeae3843455c34_0003_f0_snow.png" alt="Front Camera Snow" class="rounded-lg shadow-md w-full">
+                    <img src="figures/weather/91aeae3843455c34/91aeae3843455c34_0003_r0_snow.png" alt="Right Camera Snow" class="rounded-lg shadow-md w-full">
+
+                </div>
+
+                <h3 class="text-xl font-semibold text-center mt-12 mb-4">Corresponding Model Predictions (Example 2)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div>
+                        <h4 class="font-medium mb-2">Clean Prediction</h4>
+                        <img src="figures/weather/91aeae3843455c34/clean_ped.png" alt="Clean Prediction" class="rounded-lg shadow-md w-full">
+                    </div>
+                    <div>
+                        <h4 class="font-medium mb-2">Rain Prediction</h4>
+                        <img src="figures/weather/91aeae3843455c34/rain_pred.png" alt="Rain Prediction" class="rounded-lg shadow-md w-full">
+                    </div>
+                    <div>
+                        <h4 class="font-medium mb-2">Snow Prediction</h4>
+                        <img src="figures/weather/91aeae3843455c34/snow_pred.png" alt="Snow Prediction" class="rounded-lg shadow-md w-full">
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+        <section id="diffusion-results" class="mb-16 scroll-mt-24">
+            <div class="card">
+                <h2 class="text-2xl font-bold text-center mb-6">Trajectory Refinement via Diffusion</h2>
+                <p class="text-lg leading-relaxed mb-8 max-w-3xl mx-auto text-center">
+                    The model generates initial trajectories and refines them over diffusion steps. The final selected path is shown in red, with the second-best alternative in blue.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
+                    
+                    <div>
+                        <div class="h-80 w-full bg-gray-100 rounded-lg shadow-md overflow-hidden">
+                            <img src="figures/diff1.png" alt="Trajectory predictions 1" class="w-full h-full object-contain">
+                        </div>  
+                        <h4 class="font-medium mt-2">Going straight on narrow road</h4>
+                    </div>
+
+                    <div>
+                        <div class="h-80 w-full bg-gray-100 rounded-lg shadow-md overflow-hidden">
+                            <img src="figures/diff2.png" alt="Trajectory predictions 2" class="w-full h-full object-contain">
+                        </div>
+                        <h4 class="font-medium mt-2">Lane Change</h4>
+                    </div>
+
+                    <div>
+                        <div class="h-80 w-full bg-gray-100 rounded-lg shadow-md overflow-hidden">
+                            <img src="figures/diff3.png" alt="Trajectory predictions 3" class="w-full h-full object-contain">
+                        </div>
+                        <h4 class="font-medium mt-2">Right turn</h4>
+                    </div>
+
+                    <div>
+                        <div class="h-80 w-full bg-gray-100 rounded-lg shadow-md overflow-hidden">
+                            <img src="figures/leftturn_diff.png" alt="Trajectory predictions 4" class="w-full h-full object-contain">
+                        </div>
+                        <h4 class="font-medium mt-2">Left Turn</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="hyperparameters" class="mb-16 scroll-mt-24">
+            <div class="card">
+                <h2 class="text-2xl font-bold text-center mb-6">Hyper Parameters</h2>
+            <p class="text-lg leading-relaxed max-w-3xl mx-auto mb-4 text-center">
+                The table below summarizes the full hyperparameter configuration used for the PRIX model. 
+                We group settings for the backbone, detection and planning heads, batching and precision, 
+                optimization, distributed training, and loss weights.
+                </p>
+
+                <div class="max-w-3xl mx-auto overflow-x-auto shadow-md rounded-lg mb-10 bg-white">
+                <table class="w-full table-auto border-collapse">
+                  
+                    <thead>
+                    <tr class="border-b-2 border-gray-200">
+                        <th class="p-4 text-left text-sm font-semibold text-gray-700">Hyperparameter</th>
+                        <th class="p-4 text-left text-sm font-semibold text-gray-700">Value</th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-sm text-gray-800">
+                    <!-- Backbone -->
+                    <tr>
+                        <td colspan="2" class="pt-6 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                        Backbone configuration
+                        </td>
+                    </tr>
+                    <tr class="even:bg-gray-50">
+                        <td class="p-4">Image backbone</td>
+                        <td class="p-4">ResNet34</td>
+                    </tr>
+                    <tr class="even:bg-gray-50">
+                        <td class="p-4">Shared CaRT dimension</td>
+                        <td class="p-4">512</td>
+                    </tr>
+                    <tr class="even:bg-gray-50">
+                        <td class="p-4">Number of CaRT self-attention layers</td>
+                        <td class="p-4">2</td>
+                    </tr>
+                    <tr class="even:bg-gray-50">
+                        <td class="p-4">Number of attention heads</td>
+                        <td class="p-4">4</td>
+                    </tr>
+
+                    <!-- Heads -->
+                    <tr>
+                        <td colspan="2" class="pt-6 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                        Heads configuration (detection and planning)
+                        </td>
+                    </tr>
+                    <tr class="even:bg-gray-50">
+                        <td class="p-4">Max number of bounding boxes</td>
+                        <td class="p-4">30</td>
+                    </tr>
+                    <tr class="even:bg-gray-50">
+                        <td class="p-4">Segmentation feature channels</td>
+                        <td class="p-4">64</td>
+                    </tr>
+                    <tr class="even:bg-gray-50">
+                        <td class="p-4">Segmentation number of classes</td>
+                        <td class="p-4">7</td>
+                    </tr>
+                    <tr class="even:bg-gray-50">
+                        <td class="p-4">Trajectory output</td>
+                        <td class="p-4">(x, y, yaw)</td>
+                    </tr>
+
+                    <!-- Batching & Precision -->
+                    <tr>
+                        <td colspan="2" class="pt-6 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                        Batching and precision
+                        </td>
+                    </tr>
+                    <tr class="even:bg-gray-50">
+                        <td class="p-4">GPUs</td>
+                        <td class="p-4">8 &times; A100 (40&nbsp;GB)</td>
+                    </tr>
+                    <tr class="even:bg-gray-50">
+                        <td class="p-4">Per-GPU batch size</td>
+                        <td class="p-4">64</td>
+                    </tr>
+                    <tr class="even:bg-gray-50">
+                        <td class="p-4">Mixed precision</td>
+                        <td class="p-4">bfloat16 (AMP)</td>
+                    </tr>
+                    <tr class="even:bg-gray-50">
+                        <td class="p-4">Gradient clipping</td>
+                        <td class="p-4">0.1</td>
+                    </tr>
+
+                    <!-- Optimization -->
+                    <tr>
+                        <td colspan="2" class="pt-6 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                        Optimization
+                        </td>
+                    </tr>
+                    <tr class="even:bg-gray-50">
+                        <td class="p-4">Optimizer</td>
+                        <td class="p-4">AdamW</td>
+                    </tr>
+                    <tr class="even:bg-gray-50">
+                        <td class="p-4">Initial learning rate</td>
+                        <td class="p-4">1e-5</td>
+                    </tr>
+                    <tr class="even:bg-gray-50">
+                        <td class="p-4">Weight decay</td>
+                        <td class="p-4">1e-3</td>
+                    </tr>
+                    <tr class="even:bg-gray-50">
+                        <td class="p-4">AdamW (β₁, β₂)</td>
+                        <td class="p-4">(0.9, 0.999)</td>
+                    </tr>
+                    <tr class="even:bg-gray-50">
+                        <td class="p-4">LR scheduler</td>
+                        <td class="p-4">MultiStepLR</td>
+                    </tr>
+                    <tr class="even:bg-gray-50">
+                        <td class="p-4">LR decay factor</td>
+                        <td class="p-4">0.1</td>
+                    </tr>
+                    <tr class="even:bg-gray-50">
+                        <td class="p-4">Param-wise LR multiplier (image encoder)</td>
+                        <td class="p-4">0.5</td>
+                    </tr>
+
+                    <!-- Distributed & Data Loading -->
+                
+
+                    <!-- Loss Weights -->
+                    <tr>
+                        <td colspan="2" class="pt-6 pb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                        Loss weights
+                        </td>
+                    </tr>
+                    <tr class="even:bg-gray-50">
+                        <td class="p-4">Trajectory loss weight</td>
+                        <td class="p-4">10.0</td>
+                    </tr>
+                    <tr class="even:bg-gray-50">
+                        <td class="p-4">Agent classification weight</td>
+                        <td class="p-4">10.0</td>
+                    </tr>
+                    <tr class="even:bg-gray-50">
+                        <td class="p-4">Agent box regression weight</td>
+                        <td class="p-4">1.0</td>
+                    </tr>
+                    <tr class="even:bg-gray-50">
+                        <td class="p-4">Semantic segmentation weight</td>
+                        <td class="p-4">10.0</td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
             </div>
         </section>
 
+        <section id="additional-experiments" class="mb-16 scroll-mt-24">
+            <div class="card">
+                <h2 class="text-2xl font-bold text-center mb-6">Additional Experiments</h2>
+                <p class="text-lg leading-relaxed mb-8 max-w-3xl mx-auto text-center">
+                    All experiments in this section are performed on Navsim-v1 unless noted otherwise.
+                </p>
+    
+                <hr class="my-8 border-gray-200">
+    
+                <h3 class="text-xl font-semibold text-center mb-6">Backbone Capacity, Speed, and Stability</h3>
+                <ul class="list-disc list-inside text-lg leading-relaxed max-w-4xl mx-auto mb-6 space-y-2">
+                    <li><strong>Aim:</strong> To identify the backbone (ResNet34, ResNet50, ResNet101) that offers the best balance of performance, speed, and stability.</li>
+                    <li><strong>Method:</strong> PRIX was trained with each backbone, and PDMS (mean ± standard deviation over five runs), parameter count, and FPS were measured.</li>
+                    <li><strong>Result:</strong> <strong>ResNet34 provides the best overall trade-off.</strong> It is the fastest model (57.0 FPS) and the most stable (87.8 ± 0.1 PDMS), while showing only a minor performance difference compared to the larger and slower ResNet101.</li>
+                </ul>
+
+                <div class="max-w-3xl mx-auto overflow-x-auto shadow-md rounded-lg mb-6 bg-white">
+                    <table class="w-full table-auto border-collapse">
+                        <caption class="text-base text-gray-700 mb-4 font-medium text-center">
+                        Backbone comparison (mean±std over 5 runs)
+                        </caption>
+                        <thead>
+                        <tr class="border-b-2 border-gray-200">
+                            <th class="p-4 text-left text-sm font-semibold text-gray-700">Model</th>
+                            <th class="p-4 text-left text-sm font-semibold text-gray-700">Backbone</th>
+                            <th class="p-4 text-left text-sm font-semibold text-gray-700">PDMS</th>
+                            <th class="p-4 text-left text-sm font-semibold text-gray-700">Params</th>
+                            <th class="p-4 text-left text-sm font-semibold text-gray-700">FPS</th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-sm text-gray-800">
+                        <tr class="even:bg-gray-50">
+                            <td class="p-4">PRIX (default)</td>
+                            <td class="p-4">ResNet34</td>
+                            <td class="p-4">87.8±.1</td>
+                            <td class="p-4">37M</td>
+                            <td class="p-4 font-semibold">57.0</td>
+                        </tr>
+                        <tr class="even:bg-gray-50">
+                            <td class="p-4">PRIX-50</td>
+                            <td class="p-4">ResNet50</td>
+                            <td class="p-4">87.8±.2</td>
+                            <td class="p-4">41M</td>
+                            <td class="p-4">47.3</td>
+                        </tr>
+                        <tr class="even:bg-gray-50">
+                            <td class="p-4">PRIX-101</td>
+                            <td class="p-4">ResNet101</td>
+                            <td class="p-4">87.9±.4</td>
+                            <td class="p-4">58M</td>
+                            <td class="p-4">28.6</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+
+    
+                <hr class="my-12 border-gray-200">
+    
+                <h3 class="text-xl font-semibold text-center mb-6">Ablation on Loss Weights</h3>
+                <ul class="list-disc list-inside text-lg leading-relaxed max-w-4xl mx-auto mb-6 space-y-2">
+                    <li><strong>Aim:</strong> To determine the best weighting for the detection loss and the semantic loss.</li>
+                    <li><strong>Method:</strong> A grid search was performed over different weight combinations, and the PDMS score was recorded for each setting.</li>
+                    <li><strong>Result:</strong> <strong>A low detection loss weight and a high semantic loss weight perform best.</strong> The configuration with detection weight 1 and semantic weight 10 yields 87.8 PDMS. Performance increases consistently as the semantic loss weight increases.</li>
+                </ul>
+
+                <figure class="text-center max-w-lg mx-auto">
+                    <img src="figures/heatmap_seaborn.png" 
+                         alt="Comparison of different weights for the loss parts." 
+                         class="rounded-lg shadow-md mx-auto w-full"
+                         onerror="this.onerror=null;this.src='httpshttps://placehold.co/600x500/EBF4FF/374151?text=Image+Not+Found';">
+                    <figcaption class="text-center text-gray-600 mt-2 text-sm">PDMS score heatmap for different loss weight combinations.</figcaption>
+                </figure>
+    
+                <hr class="my-12 border-gray-200">
+    
+                <h3 class="text-xl font-semibold text-center mb-6">Sensor Failures</h3>
+                 <ul class="list-disc list-inside text-lg leading-relaxed max-w-4xl mx-auto mb-6 space-y-2">
+                    <li><strong>Aim:</strong> To test PRIX's robustness to sensor failures, such as camera noise or dropout.</li>
+                    <li><strong>Method:</strong> Sensor failures were simulated at test time for a standard model. New models were then trained with these corruptions (noise or dropout) to evaluate whether robustness improves.</li>
+                    <li><strong>Result:</strong> While failures reduce the baseline model's score from 88.7 to 82.2 PDMS, training with noise recovers the score to 84.7.</li>
+                </ul>
+
+                <div class="max-w-2xl mx-auto overflow-x-auto shadow-md rounded-lg mb-6 bg-white">
+                <table class="w-full table-auto border-collapse">
+                    <caption class="text-base text-gray-700 mb-4 font-medium text-center">
+                    Robustness to Sensor Failures
+                    </caption>
+                    <thead>
+                    <tr class="border-b-2 border-gray-200">
+                        <th class="p-4 text-left text-sm font-semibold text-gray-700">Training Method</th>
+                        <th class="p-4 text-left text-sm font-semibold text-gray-700">Test-Time Input</th>
+                        <th class="p-4 text-right text-sm font-semibold text-gray-700">PDMS Score</th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-sm text-gray-800">
+                    <tr class="even:bg-gray-50">
+                        <td class="p-4">Standard (Baseline)</td>
+                        <td class="p-4">Clean</td>
+                        <td class="p-4 text-right font-semibold">88.7</td>
+                    </tr>
+                    <tr class="even:bg-gray-50">
+                        <td class="p-4">Standard (Baseline)</td>
+                        <td class="p-4">With Failures</td>
+                        <td class="p-4 text-right">82.2</td>
+                    </tr>
+                    <tr class="even:bg-gray-50">
+                        <td class="p-4">Train w/ Full Camera Dropout</td>
+                        <td class="p-4">With Failures</td>
+                        <td class="p-4 text-right">83.9</td>
+                    </tr>
+                    <tr class="even:bg-gray-50">
+                        <td class="p-4">Train w/ Random Noise</td>
+                        <td class="p-4">With Failures</td>
+                        <td class="p-4 text-right font-semibold">84.7</td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+
+    
+                <hr class="my-12 border-gray-200">
+    
+                <h3 class="text-xl font-semibold text-center mb-6">Impact of Ego Status in the Planning Head</h3>
+                <ul class="list-disc list-inside text-lg leading-relaxed max-w-4xl mx-auto mb-6 space-y-2">
+                    <li><strong>Aim:</strong> To understand how important the ego status input (velocity, acceleration) is for the planner.</li>
+                    <li><strong>Method:</strong> We corrupted the ego status at test time (masking it, replacing it with noise) for both a standard model and a model trained *with* status corruption.</li>
+                    <li><strong>Result:</strong> Ego status is critical, but PRIX can be trained to be robust. Corrupting the status drops the baseline model's score from 87.8 to 66.8 PDMS. However, the model trained with corruption achieves a strong 84.7 PDMS, even with random inputs.</li>
+                </ul>
+                <div class="max-w-4xl mx-auto overflow-x-auto shadow-md rounded-lg mb-6 bg-white">
+                    <table class="w-full table-auto border-collapse">
+                        <caption class="text-base text-gray-700 mb-4 font-medium text-center">
+                        PDMS↑ under test-time ego status modification.
+                        </caption>
+                        <thead>
+                        <tr class="border-b-2 border-gray-200">
+                            <th class="p-4 text-left text-sm font-semibold text-gray-700">Ego Status (Test Time)</th>
+                            <th class="p-4 text-center text-sm font-semibold text-gray-700">Corruption at Training</th>
+                            <th class="p-4 text-left text-sm font-semibold text-gray-700">PRIX</th>
+                            <th class="p-4 text-left text-sm font-semibold text-gray-700">DiffusionDrive</th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-sm text-gray-800">
+                        <tr class="even:bg-gray-50">
+                            <td class="p-4">Status (Clean)</td>
+                            <td class="p-4 text-center font-bold text-gray-400">&times;</td>
+                            <td class="p-4">87.8</td>
+                            <td class="p-4">88.1</td>
+                        </tr>
+                        <tr class="even:bg-gray-50">
+                            <td class="p-4">Zero (masked)</td>
+                            <td class="p-4 text-center font-bold text-gray-400">&times;</td>
+                            <td class="p-4">64.4</td>
+                            <td class="p-4">63.9</td>
+                        </tr>
+                        <tr class="even:bg-gray-50">
+                            <td class="p-4">Random</td>
+                            <td class="p-4 text-center font-bold text-gray-400">&times;</td>
+                            <td class="p-4">66.8</td>
+                            <td class="p-4">68.1</td>
+                        </tr>
+                        <tr class="even:bg-gray-50">
+                            <td class="p-4">Scaled</td>
+                            <td class="p-4 text-center font-bold text-gray-400">&times;</td>
+                            <td class="p-4">80.9</td>
+                            <td class="p-4">81.3</td>
+                        </tr>
+                        <tr class="even:bg-gray-50">
+                            <td class="p-4">Zero (masked)</td>
+                            <td class="p-4 text-center font-bold text-blue-600">&check;</td>
+                            <td class="p-4">81.3</td>
+                            <td class="p-4">81.1</td>
+                        </tr>
+                        <tr class="even:bg-gray-50">
+                            <td class="p-4">Random</td>
+                            <td class="p-4 text-center font-bold text-blue-600">&check;</td>
+                            <td class="p-4 font-semibold">84.7</td>
+                            <td class="p-4">83.9</td>
+                        </tr>
+                        <tr class="even:bg-gray-50">
+                            <td class="p-4">Scaled</td>
+                            <td class="p-4 text-center font-bold text-blue-600">&check;</td>
+                            <td class="p-4">84.4</td>
+                            <td class="p-4">84.0</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+
+        </section>
+       
     </main>
 
-    <!-- Footer -->
     <footer class="bg-gray-800 text-white py-8">
         <div class="container mx-auto px-6 text-center">
-            <p class="mb-2">Authored by Maciej K. Wozniak, Lianhang Liu, Yixi Cai, and Patric Jensfelt.</p>
-            <p>&copy; 2025 PRIX Project. All Rights Reserved.</p>
+            <p>&copy; 2025 PRIX Project.</p>
         </div>
     </footer>
 
     <script>
-        // Get references to the animation elements
         const overlay = document.getElementById('animation-overlay');
         const car = document.getElementById('f1-animation-car');
 
-        // --- Audio Setup ---
-        // Create an Audio object for the local MP3 file.
-        // This will not work in the preview but is set up for your local environment.
         const raceSound = new Audio('figures/Voicy_Absolutely incredible.mp3');
 
-
-        // --- Animation Logic ---
-        // Function to start the animation
         function startAnimation() {
-            // Play the sound. A `try...catch` block is used to prevent errors
-            // in environments where autoplay might fail.
             try {
                 raceSound.play();
             } catch (error) {
                 console.error("Audio playback failed:", error);
             }
             
-            // Add the 'animate' class to start the CSS animation
             car.classList.add('animate');
-            
-            // Hide the overlay
             overlay.style.display = 'none';
 
-            // Remove the car from the DOM after the animation is complete
             setTimeout(() => {
                 if (car) {
                     car.remove();
                 }
-            }, 4000); // Matches the 4s animation duration
+            }, 4000);
         }
 
-        // Add a one-time click listener to the overlay
         overlay.addEventListener('click', startAnimation, { once: true });
     </script>
 </body>
