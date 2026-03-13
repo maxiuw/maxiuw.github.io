@@ -4,8 +4,7 @@ title: For Barb
 permalink: /barb/
 toc: false
 robots: noindex
-# Change this to 10 or 15 if you prefer
-autoplay_seconds: 12
+autoplay_seconds: 22
 ---
 
 
