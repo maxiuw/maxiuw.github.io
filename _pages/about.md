@@ -18,9 +18,11 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-I am a Ph.D. student supervised by Patric Jensfelt and André Pereira. My doctoral studies are supported by the Wallenberg AI, Autonomous Systems and Software Program (WASP).
+I am a Ph.D. student at [KTH Royal Institute of Technology](https://www.kth.se/profile/maciejw), supervised by [Patric Jensfelt](https://www.kth.se/profile/jensfelt) and [André Pereira](https://www.kth.se/profile/andrepe). My doctoral studies are supported by the Wallenberg AI, Autonomous Systems and Software Program ([WASP](https://wasp-sweden.org/)).
 
-I am working on projects focused on 3D computer vision solutions for robots perception and dynamic environment understanding. I also create VR/AR applications for improving human interaction with indoor and outdoor robots.
+My research focuses on 3D computer vision and deep learning for robot perception — including self-supervised pre-training, domain adaptation, and end-to-end autonomous driving. I also build VR/AR frameworks for human-robot interaction.
+
+Find me on [Google Scholar](https://scholar.google.com/citations?user=Vz7-KekAAAAJ), [GitHub](https://github.com/maxiuw), and [LinkedIn](https://www.linkedin.com/in/mawoz/).
 
 <!-- Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
 
