@@ -52,7 +52,7 @@
           </a>
         </span>
         <span class="link-block">
-          <a href="https://github.com/KTH-RPL/HilDA" class="button is-dark is-rounded">
+          <a href="https://github.com" class="button is-dark is-rounded">
             <span class="icon"><i class="fab fa-github"></i></span><span>Code</span>
           </a>
         </span>
@@ -206,18 +206,17 @@
 
     <!-- Semantic Occupancy -->
     <h3 class="title is-4">Semantic Occupancy</h3>
-    <div class="columns">
-      <div class="column">
-        <figure class="image"><img src="./static/images/sem_occ_1.png" alt="Semantic occupancy 1"></figure>
-      </div>
-      <div class="column">
-        <figure class="image"><img src="./static/images/sem_occ_3.png" alt="Semantic occupancy 2"></figure>
-      </div>
-    </div>
+    <figure class="image mb-2"><img src="./static/images/sem_occ_1.png" alt="Semantic occupancy 1"></figure>
+    <figure class="image mb-2"><img src="./static/images/sem_occ_3.png" alt="Semantic occupancy 2"></figure>
+    <figure class="image mb-2"><img src="./static/images/sem_occ_4.png" alt="Semantic occupancy 3"></figure>
+    <figure class="image mb-2"><img src="./static/images/sem_occ_2.png" alt="Semantic occupancy 4"></figure>
+    <figure class="image mb-2"><img src="./static/images/sem_occ_5.png" alt="Semantic occupancy 5"></figure>
     <p class="caption mb-6">
-      HilDA reconstructs cleaner, more complete semantic occupancy than ScaLR and CleverDistiller
-      (highlighted gaps), and keeps the highest mIoU across a 5-second horizon. Gains are largest on
-      dynamic, object-centric classes.
+      HilDA vs. ScaLR, CleverDistiller, and ground truth. Each panel shows only the
+      <em>correctly</em> predicted occupied voxels (colored by class) — baselines misclassify far
+      more voxels (highlighted), while HilDA reconstructs cleaner, more complete semantic occupancy
+      and keeps the highest mIoU across a 5-second horizon. Gains are largest on dynamic,
+      object-centric classes.
     </p>
 
     <!-- Scene Flow -->
