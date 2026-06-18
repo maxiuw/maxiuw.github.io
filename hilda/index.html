@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HilDA: Hierarchical Distillation with Diffusion for LiDAR Pre-training</title>
+  <meta name="description" content="HilDA: a self-supervised pre-training framework for LiDAR backbones combining hierarchical camera-to-LiDAR distillation with temporal occupancy diffusion. Accepted to ECCV 2026.">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/style.css">
+</head>
+<body>
+
+<!-- ============ HERO / TITLE ============ -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop has-text-centered">
+      <span class="tag is-warning is-medium eccv-badge">Accepted to ECCV 2026</span>
+      <h1 class="title is-2 publication-title">
+        HilDA: <u>Hi</u>erarchical Disti<u>l</u>lation with <u>D</u>iffusion<br>
+        for <u>A</u>dvancing Self-Supervised LiDAR Pre-training
+      </h1>
+
+      <div class="is-size-5 publication-authors">
+        <span class="author-block"><a href="#">Maciej Wozniak</a><sup>1,*</sup>,</span>
+        <span class="author-block"><a href="#">Jesper Ericsson</a><sup>1,3,*</sup>,</span>
+        <span class="author-block"><a href="#">Hariprasath Govindarajan</a><sup>2</sup>,</span>
+        <span class="author-block"><a href="#">Truls Nyberg</a><sup>1,3</sup>,</span><br>
+        <span class="author-block"><a href="#">Thomas Gustafsson</a><sup>3</sup>,</span>
+        <span class="author-block"><a href="#">Patric Jensfelt</a><sup>1</sup>,</span>
+        <span class="author-block"><a href="#">Olov Andersson</a><sup>1</sup></span>
+      </div>
+
+      <div class="is-size-6 publication-institutions">
+        <span><sup>1</sup>KTH Royal Institute of Technology</span> &nbsp;
+        <span><sup>2</sup>Linköping University</span> &nbsp;
+        <span><sup>3</sup>TRATON AB / Scania</span>
+        <br><span class="is-size-7"><sup>*</sup>Equal contribution</span>
+      </div>
+
+      <div class="publication-links">
+        <span class="link-block">
+          <a href="https://arxiv.org" class="button is-dark is-rounded">
+            <span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv</span>
+          </a>
+        </span>
+        <span class="link-block">
+          <a href="https://arxiv.org" class="button is-dark is-rounded">
+            <span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper</span>
+          </a>
+        </span>
+        <span class="link-block">
+          <a href="https://github.com" class="button is-dark is-rounded">
+            <span class="icon"><i class="fab fa-github"></i></span><span>Code</span>
+          </a>
+        </span>
+      </div>
+      <p class="is-size-7 has-text-grey">Links are placeholders — final arXiv / code to be released.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TEASER ============ -->
+<section class="section pt-0">
+  <div class="container is-max-desktop">
+    <figure class="image">
+      <img src="./static/images/teaser.png" alt="HilDA component teaser">
+    </figure>
+    <p class="caption">
+      <b>Effect of HilDA components on semantic accuracy.</b> Starting from a final-layer baseline (left),
+      segmentation errors (red) progressively vanish as we add (a) temporal occupancy diffusion,
+      (b) multi-layer distillation, and (c) global context (CLS) distillation.
+    </p>
+  </div>
+</section>
+
+<!-- ============ ABSTRACT ============ -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Abstract</h2>
+    <div class="content has-text-justified">
+      <p>
+        Vision Foundation Models (VFMs) are powerful teachers for camera-to-LiDAR knowledge
+        distillation, helping LiDAR backbones learn rich semantics without manual labels.
+        Yet current methods treat VFMs as black boxes — distilling only frame-wise features
+        from the <em>final</em> layer, and ignoring both the teacher's layer-wise semantic
+        structure and the spatiotemporal information in LiDAR sequences.
+      </p>
+      <p>
+        We propose <b>HilDA</b>, a self-supervised pre-training framework that captures both the
+        semantic <em>what</em> and the geometric <em>where</em> needed for driving. HilDA combines
+        <b>hierarchical distillation</b> — multi-layer distillation for progressive semantic
+        alignment plus global context distillation for scene-level semantics — with a
+        <b>temporal occupancy diffusion</b> objective that enforces spatiotemporal consistency.
+        Models pre-trained with HilDA reach state-of-the-art results on cross-modal distillation
+        benchmarks and outperform prior distillation methods on 3D detection, scene flow, and
+        semantic occupancy prediction.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ METHOD ============ -->
+<section class="section has-background-light">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Method</h2>
+
+    <figure class="image mb-4">
+      <img src="./static/images/architecture.png" alt="HilDA architecture overview">
+    </figure>
+    <p class="caption mb-6">
+      <b>Overview of HilDA.</b> From LiDAR sweeps and synchronized multi-view images, a 3D backbone
+      is trained with three self-supervised objectives: multi-layer point–pixel distillation from a
+      frozen VFM, global context distillation via CLS tokens, and temporal occupancy diffusion
+      conditioned on past + present student features to predict future BEV occupancy.
+    </p>
+
+    <div class="columns is-multiline">
+      <div class="column is-4">
+        <div class="box method-box">
+          <h3 class="title is-5"><span class="step">1</span> Multi-Layer Distillation</h3>
+          <p>
+            Instead of supervising only the VFM's final layer, HilDA aligns <b>multiple</b> teacher
+            layers with corresponding student layers via calibrated point–pixel correspondences.
+            The 3D student learns <em>how</em> features form across the hierarchy, transferring the
+            teacher's progressive semantic refinement.
+          </p>
+        </div>
+      </div>
+      <div class="column is-4">
+        <div class="box method-box">
+          <h3 class="title is-5"><span class="step">2</span> Global Context Distillation</h3>
+          <p>
+            Local point–pixel matching misses scene-level context. HilDA aligns the VFM's
+            <b>CLS token</b> with a learnable 3D global-context token (max-pooled student features),
+            injecting holistic, scene-level semantics — e.g. distinguishing highway from residential.
+          </p>
+        </div>
+      </div>
+      <div class="column is-4">
+        <div class="box method-box">
+          <h3 class="title is-5"><span class="step">3</span> Temporal Occupancy Diffusion</h3>
+          <p>
+            A label-free generative auxiliary task: a conditional diffusion model denoises
+            <b>future BEV occupancy</b> given past + present LiDAR features. Coarse-to-fine
+            denoising injects geometric and motion cues, teaching the backbone object permanence
+            and scene dynamics.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content has-text-justified">
+      <p>
+        All three objectives are optimized jointly, end-to-end, on the nuScenes training split using
+        only synchronized RGB–LiDAR data and calibration — <b>no task labels</b>. The resulting
+        backbone transfers to <em>all</em> downstream benchmarks without re-pretraining; the
+        distillation and diffusion heads are discarded at inference.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESULTS ============ -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Results</h2>
+    <p class="content has-text-centered mb-6">
+      HilDA sets a new state of the art on camera–LiDAR cross-modal distillation and transfers
+      strongly to spatial and spatiotemporal 3D tasks. Highlights below.
+    </p>
+
+    <!-- Segmentation -->
+    <h3 class="title is-4">Semantic Segmentation</h3>
+    <figure class="image">
+      <img src="./static/images/segmentation.png" alt="Segmentation qualitative comparison">
+    </figure>
+    <p class="caption mb-6">
+      HilDA makes fewer errors (red) than ScaLR and correctly segments rare long-tail cases —
+      a scooter driver (Scene 1) and a person on top of a truck (Scene 2). Largest gains appear in
+      the data-scarce 1–10% label regimes.
+    </p>
+
+    <!-- PCA feature embeddings -->
+    <h3 class="title is-4">Learned Feature Embeddings (PCA)</h3>
+    <figure class="image">
+      <img src="./static/images/pca_seg1.png" alt="PCA feature embeddings comparison">
+    </figure>
+    <p class="caption mb-6">
+      PCA projections of the learned point features (top), segmentation error maps (middle), and
+      ground truth (bottom). HilDA produces more structured, object-coherent embeddings than
+      CleverDistiller, translating into fewer segmentation errors (red).
+    </p>
+
+    <!-- 3D Detection -->
+    <h3 class="title is-4">3D Object Detection</h3>
+    <figure class="image">
+      <img src="./static/images/det_3d.png" alt="3D detection comparison">
+    </figure>
+    <p class="caption mb-6">
+      With PointRCNN, HilDA yields robust detections at long range and under heavy occlusion
+      (highlighted), where the prior distillation baseline (CleverDistiller) misses objects.
+    </p>
+
+    <!-- Semantic Occupancy -->
+    <h3 class="title is-4">Semantic Occupancy</h3>
+    <div class="columns">
+      <div class="column">
+        <figure class="image"><img src="./static/images/sem_occ_1.png" alt="Semantic occupancy 1"></figure>
+      </div>
+      <div class="column">
+        <figure class="image"><img src="./static/images/sem_occ_3.png" alt="Semantic occupancy 2"></figure>
+      </div>
+    </div>
+    <p class="caption mb-6">
+      HilDA reconstructs cleaner, more complete semantic occupancy than ScaLR and CleverDistiller
+      (highlighted gaps), and keeps the highest mIoU across a 5-second horizon. Gains are largest on
+      dynamic, object-centric classes.
+    </p>
+
+    <!-- Scene Flow -->
+    <h3 class="title is-4">Scene Flow</h3>
+    <div class="columns is-vcentered">
+      <div class="column has-text-centered">
+        <p class="subtitle is-6">Baseline — flow / error</p>
+        <img src="./static/images/base_flow.png" alt="baseline flow" class="flow-img">
+        <img src="./static/images/base_error.png" alt="baseline error" class="flow-img">
+      </div>
+      <div class="column has-text-centered">
+        <p class="subtitle is-6">HilDA — flow / error</p>
+        <img src="./static/images/our_flow.png" alt="ours flow" class="flow-img">
+        <img src="./static/images/our_error.png" alt="ours error" class="flow-img">
+      </div>
+    </div>
+    <p class="caption">
+      Integrated into SSF on Argoverse 2, HilDA's pre-trained features give cleaner motion maps and
+      far fewer high-error regions (red), especially for dynamic objects — better temporal structure
+      means better motion estimation where baselines fail.
+    </p>
+  </div>
+</section>
+
+<!-- ============ FEATURE SIMILARITY ============ -->
+<section class="section has-background-light">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Cross-Modal Feature Alignment</h2>
+    <p class="content has-text-centered mb-5">
+      Picking a single anchor (<span style="color:#d4a000;font-weight:700;">yellow</span> dot) and
+      comparing its feature against all others reveals how well HilDA's 3D features align with the
+      2D VFM teacher — across modalities, views, and semantic classes.
+    </p>
+
+    <figure class="image mb-2">
+      <img src="./static/images/feat_sim_1.png" alt="Cross-modal feature cosine similarity">
+    </figure>
+    <p class="caption mb-6">
+      <b>Cross-modal similarity.</b> Cosine-similarity maps for an anchor point–pixel pair across
+      three scenes. HilDA's 3D similarity (bottom) closely matches DINOv2's 2D pattern — strong
+      cross-modal alignment across environments and classes.
+    </p>
+
+    <figure class="image mb-2">
+      <img src="./static/images/feat_sim_2.png" alt="Cross-view feature cosine similarity">
+    </figure>
+    <p class="caption">
+      <b>Cross-view similarity (car anchor).</b> A single car anchor lights up other cars across all
+      surround-view cameras and LiDAR points — category-level, cross-view alignment.
+    </p>
+  </div>
+</section>
+
+<!-- ============ ANNOTATION NOISE ============ -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Beyond the Labels: Recovering Annotation Errors</h2>
+    <p class="content has-text-centered mb-5">
+      HilDA's features are robust enough to <em>correct mistakes in the ground truth itself</em>.
+    </p>
+
+    <figure class="image mb-2">
+      <img src="./static/images/annot_err_1.png" alt="Annotation error recovery 1">
+    </figure>
+    <p class="caption mb-6">
+      Ground truth mislabels a light pole and two construction signs as <i>"vegetation"</i>; HilDA
+      correctly predicts <i>"manmade"</i>.
+    </p>
+
+    <figure class="image mb-2">
+      <img src="./static/images/annot_err_3.png" alt="Annotation false negatives detection">
+    </figure>
+    <p class="caption">
+      <b>Detection false negatives.</b> Where the annotations miss objects entirely, HilDA still
+      recovers them — pedestrians and parked cars that CleverDistiller fails to capture.
+    </p>
+  </div>
+</section>
+
+<!-- ============ BIBTEX ============ -->
+<section class="section has-background-light">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">BibTeX</h2>
+    <pre class="bibtex">@inproceedings{wozniak2026hilda,
+  title     = {HilDA: Hierarchical Distillation with Diffusion for
+               Advancing Self-Supervised LiDAR Pre-training},
+  author    = {Wozniak, Maciej and Ericsson, Jesper and
+               Govindarajan, Hariprasath and Nyberg, Truls and
+               Gustafsson, Thomas and Jensfelt, Patric and Andersson, Olov},
+  booktitle = {European Conference on Computer Vision (ECCV)},
+  year      = {2026}
+}</pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container has-text-centered">
+    <p class="is-size-7">
+      Website template adapted from
+      <a href="https://nerfies.github.io/">Nerfies</a>. Content © the authors.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
