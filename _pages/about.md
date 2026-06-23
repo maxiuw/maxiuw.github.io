@@ -9,8 +9,8 @@ profile:
   image: me.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
-    <p>LV24, KTH-RPL</p>
-    <p>Stockholm, Sweden</p>
+    <p>Zenseact</p>
+    <p>Gothenburg / Stockholm, Sweden</p>
 
 news: true  # includes a list of news items
 latest_posts: true  # includes a list of the newest posts
@@ -18,9 +18,9 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-I am a Ph.D. student at [KTH Royal Institute of Technology](https://www.kth.se/profile/maciejw), supervised by [Patric Jensfelt](https://www.kth.se/profile/jensfelt) and [André Pereira](https://www.kth.se/profile/andrepe). My doctoral studies are supported by the Wallenberg AI, Autonomous Systems and Software Program ([WASP](https://wasp-sweden.org/)).
+I am a Senior Deep Learning Researcher at [Zenseact](https://zenseact.com/), working on perception and planning for autonomous driving. I received my Ph.D. from [KTH Royal Institute of Technology](https://www.kth.se/profile/maciejw) in 2026 with the thesis [*Look Ma, No Labels: From Robust Perception to Self-Supervised Representation Learning for Autonomous Driving*](https://urn.kb.se/resolve?urn=urn:nbn:se:kth:diva-388726), supervised by [Patric Jensfelt](https://www.kth.se/profile/jensfelt) and [André Pereira](https://www.kth.se/profile/andrepe). My doctoral studies were supported by the Wallenberg AI, Autonomous Systems and Software Program ([WASP](https://wasp-sweden.org/)). During my Ph.D. I also interned at Qualcomm and was selected as an [ACM/IEEE HRI Pioneer](https://hripioneers.org/).
 
-My research focuses on 3D computer vision and deep learning for robot perception — including self-supervised pre-training, domain adaptation, and end-to-end autonomous driving. I also build VR/AR frameworks for human-robot interaction.
+My research focuses on 3D computer vision and deep learning for robot perception — including self-supervised pre-training and distillation of foundation models into LiDAR backbones, domain adaptation, end-to-end planning, and diffusion models for driving. I also build VR/AR frameworks for human-robot interaction.
 
 Find me on [Google Scholar](https://scholar.google.com/citations?user=Vz7-KekAAAAJ), [GitHub](https://github.com/maxiuw), and [LinkedIn](https://www.linkedin.com/in/mawoz/).
 
